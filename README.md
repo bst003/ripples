@@ -1,2 +1,3 @@
 # ripples
-A Squabbles/Reddit inspired reddit.
+
+A Squabbles/Reddit inspired web app.
