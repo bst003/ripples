@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import MainLayout from "./templates/MainLayout.jsx";
+
 import Home from "./views/Home.jsx";
 import SubRipple from "./views/SubRipple.jsx";
 import Profile from "./views/Profile.jsx";
@@ -9,10 +11,12 @@ const RouteSwitch = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/r/:slug" element={<SubRipple />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<NotFound />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/r/:slug" element={<SubRipple />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
