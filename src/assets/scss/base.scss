@@ -2,6 +2,16 @@
 ////////////////////////////////////////////////
 
 :root{
+    --brandBlack: #111;
+    --brandWhite: #FEFEFE;
+    --brandBlue: #2892D7;
+    --brandDarkBlue: #2074AC;
+    --brandRed: #DB504A;
+
+    --baseLineHeight: 1.4;
+    --headingLineHeight: 1.2;
+
+    --sitePrimaryFont: 'Geologica', sans-serif;
 
     --siteHorizonalPadding: 30px;
     --siteContentWidth: 1320px;
@@ -15,7 +25,8 @@
 }
 
 body{
-    // background-color: red;
+    color: var(--brandBlack);
+    font-family: var(--sitePrimaryFont);
 }
 
 #root > div{
