@@ -3,6 +3,8 @@
 
 :root{
 
+    --siteHorizonalPadding: 30px;
+    --siteContentWidth: 1320px;
 }
 
 // Site Base
@@ -24,6 +26,12 @@ body{
 
 .site-main{
     flex: 1 1;
+    padding: 0px var(--siteHorizonalPadding);
+
+    &__inner{
+        max-width: var(--siteContentWidth);
+        width: 100%;
+    }
 }
 
 // Helper Classes

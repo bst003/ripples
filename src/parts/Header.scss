@@ -1,3 +1,9 @@
 .site-header{
     background-color: blue;
+    padding: 0px var(--siteHorizonalPadding);
+
+    &__inner{
+        max-width: var(--siteContentWidth);
+        width: 100%;
+    }
 }
