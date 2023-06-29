@@ -6,7 +6,7 @@ import "./assets/scss/base.scss";
 import "normalize.css";
 
 import { initializeApp } from "firebase/app";
-import { getFirebaseConfig } from "./firebaseConfig.js";
+import { getFirebaseConfig } from "./firebase/config.js";
 
 const firebaseAppConfig = getFirebaseConfig();
 initializeApp(firebaseAppConfig);
