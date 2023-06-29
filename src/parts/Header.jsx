@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import AccountNav from "../components/universal/AccountNav.jsx";
 
 import "./Header.scss";
 
@@ -9,6 +10,8 @@ const Header = () => {
         <div className="site-logo h2">
           <Link to="/">Ripples</Link>
         </div>
+
+        <AccountNav />
       </div>
     </header>
   );

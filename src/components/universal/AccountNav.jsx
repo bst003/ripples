@@ -1,7 +1,15 @@
+import { signInUser, signOutUser } from "../../firebase/authentication.js";
+
 const AccountNav = () => {
   return (
-    <div className="site-header">
-      <button type="button">Sign In</button>
+    <div className="site-acount-nav">
+      <button type="button" onClick={signInUser}>
+        Sign In
+      </button>
+
+      <button type="button" onClick={signOutUser}>
+        Sign Out
+      </button>
     </div>
   );
 };

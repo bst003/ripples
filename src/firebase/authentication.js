@@ -6,6 +6,12 @@ import {
   signOut,
 } from "firebase/auth";
 
+const initFirebaseAuth = () => {
+  // Listen to auth state changes.
+  console.log(getAuth());
+  onAuthStateChanged(getAuth(), authStateObserver);
+};
+
 const signInUser = async () => {
   // Sign in Firebase using popup auth and Google as the identity provider.
   var provider = new GoogleAuthProvider();
@@ -32,18 +38,14 @@ const authStateObserver = () => {
   if (user) {
     // User is signed in!
     // Get the signed-in user's profile pic and name.
-    var profilePicUrl = getProfilePicUrl();
-    var userName = getUserName();
+    // var profilePicUrl = getProfilePicUrl();
+    // var userName = getUserName();
 
+    console.log(user);
     console.log("user is signed in");
   } else {
     console.log("not signed in");
   }
-};
-
-const initFirebaseAuth = () => {
-  // Listen to auth state changes.
-  onAuthStateChanged(getAuth(), authStateObserver);
 };
 
 export { initFirebaseAuth, signInUser, signOutUser };

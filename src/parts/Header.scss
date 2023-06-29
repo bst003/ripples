@@ -1,5 +1,7 @@
 .site-header{
-    background-color: blue;
+    // background-color: blue;
+    background-color: var(--brandWhite);
+    border-bottom: 1px solid var(--siteBorderColor);
     padding: 0px var(--siteHorizonalPadding);
 
     &__inner{

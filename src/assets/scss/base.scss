@@ -6,6 +6,7 @@
     --brandLightGray: #dee2e6;
     --brandDarkGray: #212529;
     --brandWhite: #FEFEFE;
+    --brandOffWhite: #F5F5F5;
     --brandBlue: #2892d7;
     --brandDarkBlue: #2074AC;
     --brandRed: #DB504A;
@@ -14,6 +15,9 @@
     --headingLineHeight: 1.2;
 
     --sitePrimaryFont: 'Geologica', sans-serif;
+
+    --sitePrimaryBackgroundColor: var(--brandOffWhite);
+    --siteBorderColor: var(--brandLightGray);
 
     --siteHorizonalPadding: 30px;
     --siteContentWidth: 1320px;
@@ -27,6 +31,7 @@
 }
 
 body{
+    background-color: var(--sitePrimaryBackgroundColor);
     color: var(--brandBlack);
     font-family: var(--sitePrimaryFont);
 }
