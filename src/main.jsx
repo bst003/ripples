@@ -7,11 +7,11 @@ import "normalize.css";
 
 import { initializeApp } from "firebase/app";
 import { getFirebaseConfig } from "./firebase/config.js";
-import { initFirebaseAuth } from "./firebase/authentication.js";
+// import { initFirebaseAuth } from "./firebase/authentication.js";
 
 const firebaseAppConfig = getFirebaseConfig();
 initializeApp(firebaseAppConfig);
-initFirebaseAuth();
+// initFirebaseAuth();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -34,14 +34,16 @@ function getUserName() {
   return getAuth().currentUser.displayName;
 }
 
-const authStateObserver = () => {
+const authStateObserver = (user) => {
   if (user) {
     // User is signed in!
     // Get the signed-in user's profile pic and name.
-    // var profilePicUrl = getProfilePicUrl();
-    // var userName = getUserName();
+    const profilePicUrl = getProfilePicUrl();
+    const userName = getUserName();
 
     console.log(user);
+    console.log(profilePicUrl);
+    console.log(userName);
     console.log("user is signed in");
   } else {
     console.log("not signed in");
