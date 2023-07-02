@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// import { initFirebaseAuth } from "./firebase/authentication.js";
+import { userExists } from "./firebase/authentication.js";
 
-import {
-  getAuth,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import MainLayout from "./templates/MainLayout.jsx";
 
@@ -21,14 +15,23 @@ import NotFound from "./views/NotFound.jsx";
 const RouteSwitch = () => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    onAuthStateChanged(getAuth(), (authUser) => {
+  const initAuthListener = async () => {
+    onAuthStateChanged(getAuth(), async (authUser) => {
       if (authUser) {
+        console.log(authUser);
+        const user = await userExists(authUser.uid);
+        if (user) {
+          console.log("this works");
+        }
         setUser(authUser);
       } else {
         setUser(null);
       }
     });
+  };
+
+  useEffect(() => {
+    initAuthListener();
   }, []);
 
   return (

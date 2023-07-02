@@ -6,6 +6,14 @@ import {
   signOut,
 } from "firebase/auth";
 
+import {
+  collection,
+  getFirestore,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore/lite";
+
 const initFirebaseAuth = () => {
   // Listen to auth state changes.
   console.log(getAuth());
@@ -22,6 +30,24 @@ const signInUser = async () => {
 const signOutUser = () => {
   // Sign out of Firebase.
   signOut(getAuth());
+};
+
+const userExists = async (authId) => {
+  try {
+    const usersQuery = query(
+      collection(getFirestore(), "users"),
+      where("userId", "==", authId)
+    );
+
+    const usersQuerySnapshot = await getDocs(usersQuery);
+    if (usersQuerySnapshot._docs.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Error fetching users: " + error);
+  }
 };
 
 // Returns the signed-in user's profile Pic URL.
@@ -50,4 +76,4 @@ const authStateObserver = (user) => {
   }
 };
 
-export { initFirebaseAuth, signInUser, signOutUser };
+export { initFirebaseAuth, signInUser, signOutUser, userExists };
