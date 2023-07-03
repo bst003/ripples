@@ -33,6 +33,7 @@ const signOutUser = () => {
 };
 
 const userExists = async (authId) => {
+  console.log(authId);
   try {
     const usersQuery = query(
       collection(getFirestore(), "users"),
@@ -40,7 +41,13 @@ const userExists = async (authId) => {
     );
 
     const usersQuerySnapshot = await getDocs(usersQuery);
+    console.log(usersQuerySnapshot);
+    usersQuerySnapshot.forEach((doc) => {
+      console.log(doc);
+    });
+
     if (usersQuerySnapshot._docs.length > 0) {
+      console.log("a user with this ID exists");
       return true;
     } else {
       return false;
