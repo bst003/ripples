@@ -7,9 +7,13 @@ import {
   getFirestore,
   collection,
   doc,
+  limit,
   addDoc,
+  getDocs,
   setDoc,
   serverTimestamp,
+  query,
+  where,
 } from "firebase/firestore/lite";
 import { getDatabase } from "firebase/database";
 
@@ -32,7 +36,8 @@ const RouteSwitch = () => {
   const formatUserData = (user) => {
     return {
       userId: user.uid,
-      username: trimEmail(user.email),
+      userEmail: user.email,
+      userName: trimEmail(user.email),
     };
   };
 
@@ -42,14 +47,35 @@ const RouteSwitch = () => {
         ...userObj,
         timestamp: serverTimestamp(),
       });
-
-      //   const db = getDatabase();
-      //   await setDoc(doc(db, "user"), {
-      //     ...userObj,
-      //     timestamp: serverTimestamp(),
-      //   });
     } catch (error) {
       console.error("Error saving user to Firebase Database", error);
+    }
+  };
+
+  const getUserData = async (userId) => {
+    try {
+      const userQuery = query(
+        collection(getFirestore(), "users"),
+        where("userId", "==", userId),
+        limit(1)
+      );
+
+      const userQuerySnapshot = await getDocs(userQuery);
+
+      const userObj = {};
+      userQuerySnapshot.forEach((doc) => {
+        console.log(doc.data());
+        userObj.userId = doc.data().userId;
+        userObj.userName = doc.data().userName;
+        // userObj[userId] = doc.data().userId;
+        // userObj[userName] = doc.data().userName;
+      });
+
+      console.log(userObj);
+
+      return userObj;
+    } catch (error) {
+      console.log("Error fetching user data: " + error);
     }
   };
 
@@ -72,7 +98,9 @@ const RouteSwitch = () => {
           createUser(formattedUserData);
         }
 
-        setUser(authUser);
+        const userData = await getUserData(authUser.uid);
+
+        setUser(userData);
       } else {
         setUser(null);
       }
@@ -85,7 +113,7 @@ const RouteSwitch = () => {
 
   return (
     <>
-      {user ? user.displayName : "no user"}
+      {user ? user.userName : "no user"}
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
