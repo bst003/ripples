@@ -6,16 +6,13 @@ import { userExists } from "./firebase/authentication.js";
 import {
   getFirestore,
   collection,
-  doc,
   limit,
   addDoc,
   getDocs,
-  setDoc,
   serverTimestamp,
   query,
   where,
 } from "firebase/firestore/lite";
-import { getDatabase } from "firebase/database";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
