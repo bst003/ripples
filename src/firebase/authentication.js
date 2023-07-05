@@ -14,6 +14,14 @@ import {
   where,
 } from "firebase/firestore/lite";
 
+/*
+
+How to organize authentication and user functions
+  - Only auth functions in this file and user fetching/organization functions in their own file?
+    - Should firebase querying be in a separate file from helper functions like the user organizaton files?
+
+*/
+
 const initFirebaseAuth = () => {
   // Listen to auth state changes.
   console.log(getAuth());
