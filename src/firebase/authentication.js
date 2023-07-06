@@ -1,18 +1,9 @@
 import {
   getAuth,
-  onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-
-import {
-  collection,
-  getFirestore,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore/lite";
 
 /*
 
