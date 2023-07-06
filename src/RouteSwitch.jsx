@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { createUser, getUserData, userExists } from "./firebase/user.js";
-
-import { formatUserData } from "./util/formatting.js";
-
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { initAuthListener } from "./firebase/authentication.js";
 
 import MainLayout from "./components/universal/MainLayout.jsx";
 
@@ -17,28 +13,8 @@ import NotFound from "./views/NotFound.jsx";
 const RouteSwitch = () => {
   const [user, setUser] = useState(null);
 
-  const initAuthListener = async () => {
-    onAuthStateChanged(getAuth(), async (authUser) => {
-      if (authUser) {
-        const user = await userExists(authUser.uid);
-
-        // If user does not exist in DB add one
-        if (!user) {
-          const formattedUserData = formatUserData(authUser);
-          createUser(formattedUserData);
-        }
-
-        const userData = await getUserData(authUser.uid);
-
-        setUser(userData);
-      } else {
-        setUser(null);
-      }
-    });
-  };
-
   useEffect(() => {
-    initAuthListener();
+    initAuthListener(setUser);
   }, []);
 
   return (

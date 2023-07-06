@@ -1,6 +1,11 @@
+import { createUser, getUserData, userExists } from "../firebase/user.js";
+
+import { formatUserData } from "../util/formatting.js";
+
 import {
   getAuth,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -35,4 +40,24 @@ const signOutUser = () => {
 //   return getAuth().currentUser.displayName;
 // }
 
-export { signInUser, signOutUser };
+const initAuthListener = async (setUserState) => {
+  onAuthStateChanged(getAuth(), async (authUser) => {
+    if (authUser) {
+      const user = await userExists(authUser.uid);
+
+      // If user does not exist in DB add one
+      if (!user) {
+        const formattedUserData = formatUserData(authUser);
+        createUser(formattedUserData);
+      }
+
+      const userData = await getUserData(authUser.uid);
+
+      setUserState(userData);
+    } else {
+      setUserState(null);
+    }
+  });
+};
+
+export { initAuthListener, signInUser, signOutUser };
