@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import AccountNav from "../components/universal/AccountNav.jsx";
+import AccountNav from "./AccountNav.jsx";
 
 import "./Header.scss";
 

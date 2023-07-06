@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { userExists } from "./firebase/authentication.js";
+import { createUser, getUserData, userExists } from "./firebase/user.js";
 
-import {
-  getFirestore,
-  collection,
-  limit,
-  addDoc,
-  getDocs,
-  serverTimestamp,
-  query,
-  where,
-} from "firebase/firestore/lite";
+import { formatUserData } from "./util/formatting.js";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import MainLayout from "./templates/MainLayout.jsx";
+import MainLayout from "./components/universal/MainLayout.jsx";
 
 import Home from "./views/Home.jsx";
 import SubRipple from "./views/SubRipple.jsx";
@@ -26,72 +17,14 @@ import NotFound from "./views/NotFound.jsx";
 const RouteSwitch = () => {
   const [user, setUser] = useState(null);
 
-  const trimEmail = (email) => {
-    return email.split("@")[0];
-  };
-
-  const formatUserData = (user) => {
-    return {
-      userId: user.uid,
-      userEmail: user.email,
-      userName: trimEmail(user.email),
-    };
-  };
-
-  const createUser = async (userObj) => {
-    try {
-      await addDoc(collection(getFirestore(), "users"), {
-        ...userObj,
-        timestamp: serverTimestamp(),
-      });
-    } catch (error) {
-      console.error("Error saving user to Firebase Database", error);
-    }
-  };
-
-  const getUserData = async (userId) => {
-    try {
-      const userQuery = query(
-        collection(getFirestore(), "users"),
-        where("userId", "==", userId),
-        limit(1)
-      );
-
-      const userQuerySnapshot = await getDocs(userQuery);
-
-      const userObj = {};
-      userQuerySnapshot.forEach((doc) => {
-        console.log(doc.data());
-        userObj.userId = doc.data().userId;
-        userObj.userName = doc.data().userName;
-        // userObj[userId] = doc.data().userId;
-        // userObj[userName] = doc.data().userName;
-      });
-
-      console.log(userObj);
-
-      return userObj;
-    } catch (error) {
-      console.log("Error fetching user data: " + error);
-    }
-  };
-
   const initAuthListener = async () => {
     onAuthStateChanged(getAuth(), async (authUser) => {
       if (authUser) {
-        console.log(authUser);
         const user = await userExists(authUser.uid);
-        console.log("post user check");
 
-        const userName = trimEmail(authUser.email);
-        console.log(userName);
-
-        if (user) {
-          console.log("this works");
-        } else {
-          console.log("this is a new user");
+        // If user does not exist in DB add one
+        if (!user) {
           const formattedUserData = formatUserData(authUser);
-          console.log(formattedUserData);
           createUser(formattedUserData);
         }
 
