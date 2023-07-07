@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { initAuthListener } from "./firebase/authentication.js";
 
 import MainLayout from "./components/universal/MainLayout.jsx";
+import UserContext from "./components/universal/UserContext.jsx";
 
 import Home from "./views/Home.jsx";
 import SubRipple from "./views/SubRipple.jsx";
@@ -20,16 +21,18 @@ const RouteSwitch = () => {
   return (
     <>
       {user ? user.userName : "no user"}
-      <BrowserRouter>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/r/:slug" element={<SubRipple />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <UserContext.Provider value={user}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/r/:slug" element={<SubRipple />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </>
   );
 };
