@@ -10,9 +10,12 @@ const AccountNav = () => {
   return (
     <div className="site-acount-nav">
       {user ? (
-        <button type="button" onClick={signOutUser}>
-          Sign Out
-        </button>
+        <>
+          {user.userName}
+          <button type="button" onClick={signOutUser}>
+            Sign Out
+          </button>
+        </>
       ) : (
         <button type="button" onClick={signInUser}>
           Sign In with Google

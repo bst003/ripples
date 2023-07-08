@@ -20,7 +20,6 @@ const RouteSwitch = () => {
 
   return (
     <>
-      {user ? user.userName : "no user"}
       <UserContext.Provider value={user}>
         <BrowserRouter>
           <Routes>
