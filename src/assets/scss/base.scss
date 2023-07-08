@@ -1,9 +1,11 @@
 // Variables
 ////////////////////////////////////////////////
 
+
 :root{
     --brandBlack: #111;
-    --brandLightGray: #dee2e6;
+    --brandLightGray: #eee;
+    --brandLightestGray: #dee2e6;
     --brandDarkGray: #212529;
     --brandWhite: #FEFEFE;
     --brandOffWhite: #F5F5F5;
@@ -16,8 +18,12 @@
 
     --sitePrimaryFont: 'Geologica', sans-serif;
 
-    --sitePrimaryBackgroundColor: var(--brandOffWhite);
-    --siteBorderColor: var(--brandLightGray);
+    --sitePrimaryFontColor: var(--brandBlack);
+
+    --sitePrimaryBackgroundColor: var(--brandLightGray);
+
+    --siteBorderColor: var(--brandLightestGray);
+    --siteBorderRadius: 6px;
 
     --siteHorizonalPadding: 30px;
     --siteContentWidth: 1320px;
@@ -32,7 +38,7 @@
 
 body{
     background-color: var(--sitePrimaryBackgroundColor);
-    color: var(--brandBlack);
+    color: var(--sitePrimaryFontColor);
     font-family: var(--sitePrimaryFont);
 }
 
@@ -71,3 +77,40 @@ body{
 
 // Base Typography
 ////////////////////////////////////////////////
+
+
+// Base Forms
+////////////////////////////////////////////////
+
+input{
+
+    &:not([type="radio"]),
+    &:not([type="checkbox"]),
+    &:not([type="submit"]),
+    &:not([type="button"]),
+    &:not([type="image"]),
+    &:not([type="file"]){
+        border: 1px solid var(--siteBorderColor);
+        border-radius: var(--siteBorderRadius);
+        height: 40px;
+        padding: 0px 10px;
+        color: var(--sitePrimaryFontColor);
+        font-size: 18px;
+
+        &::placeholder{
+            color: var(--sitePrimaryFontColor);
+            opacity: .5;
+        }
+        &:-ms-input-placeholder{
+            color: var(--sitePrimaryFontColor);
+            opacity: .7;
+        }
+
+        &::-ms-input-placeholder { 
+            color: var(--sitePrimaryFontColor);
+            opacity: .7;
+        }
+
+    }
+
+}
