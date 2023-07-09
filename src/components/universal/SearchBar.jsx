@@ -11,10 +11,11 @@ const SearchBar = () => {
           type="text"
           placeholder="Search Posts"
         />
+        <button type="submit">
+          <i className="fas fa-search"></i>
+          <span className="screen-reader-text">Search</span>
+        </button>
       </label>
-      <button type="submit">
-        <span className="screen-reader-text">Search</span>
-      </button>
     </form>
   );
 };

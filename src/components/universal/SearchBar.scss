@@ -1,5 +1,27 @@
 .site-search-bar{
-    input{
+
+    label{
+        position: relative;
         width: 100%;
+    }
+
+
+    input{
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        padding: 0px 60px 0px 10px;
+    }
+
+    button{
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        background-color: unset;
+        border: unset;
+        font-size: 26px; 
+        font-weight: 700;
     }
 }

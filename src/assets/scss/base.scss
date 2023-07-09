@@ -77,7 +77,14 @@ body{
 
 // Base Typography
 ////////////////////////////////////////////////
+  
 
+// Base Buttons
+////////////////////////////////////////////////
+
+button{
+    cursor: pointer; 
+}
 
 // Base Forms
 ////////////////////////////////////////////////
@@ -93,7 +100,7 @@ input{
         background-color: var(--brandOffWhite);
         border: 1px solid var(--siteBorderColor);
         border-radius: var(--siteBorderRadius);
-        height: 40px;
+        height: 44px; 
         padding: 0px 10px;
         color: var(--sitePrimaryFontColor);
         font-size: 18px;
