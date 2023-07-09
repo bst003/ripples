@@ -4,6 +4,7 @@
     padding: 8px var(--siteHorizonalPadding);
 
     &__inner{
+        margin: 0 auto;
         max-width: var(--siteContentWidth);
         width: 100%;
         display: flex; 

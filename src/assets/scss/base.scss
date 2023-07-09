@@ -90,6 +90,7 @@ input{
     &:not([type="button"]),
     &:not([type="image"]),
     &:not([type="file"]){
+        background-color: var(--brandOffWhite);
         border: 1px solid var(--siteBorderColor);
         border-radius: var(--siteBorderRadius);
         height: 40px;
@@ -99,16 +100,16 @@ input{
 
         &::placeholder{
             color: var(--sitePrimaryFontColor);
-            opacity: .5;
+            opacity: .6;
         }
         &:-ms-input-placeholder{
             color: var(--sitePrimaryFontColor);
-            opacity: .7;
+            opacity: .6;
         }
 
         &::-ms-input-placeholder { 
             color: var(--sitePrimaryFontColor);
-            opacity: .7;
+            opacity: .6;
         }
 
     }
