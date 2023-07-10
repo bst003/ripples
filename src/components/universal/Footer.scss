@@ -1,8 +1,50 @@
 .site-footer{
-    padding: 0px var(--siteHorizonalPadding);
+    padding: 30px var(--siteHorizonalPadding);
+    background-color: var(--brandDarkGray);
+    color: var(--brandWhite);
 
     &__inner{
+        margin: 0 auto;
         max-width: var(--siteContentWidth);
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
     }
+
+    &__navigation{
+        ul{
+            display: flex;
+            gap: 16px;
+        }
+    }
+
+    li,
+    a{
+        color: var(--brandWhite);
+    }
+
+    @media screen and ( max-width: 576px ){
+        &__inner{
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        &__credits,
+        &__navigation{
+            width: 100%;
+        }
+
+        &__credits{
+            text-align: center;
+        }
+
+        &__navigation{
+            ul{
+                justify-content: center;
+            }
+        }
+    }
+
 }

@@ -1,7 +1,6 @@
 // Variables
 ////////////////////////////////////////////////
 
-
 :root{
     --brandBlack: #111;
     --brandLightGray: #eee;
@@ -84,6 +83,19 @@ body{
 
 button{
     cursor: pointer; 
+}
+
+// Base Nav
+////////////////////////////////////////////////
+
+nav{
+ 
+    ul{
+        margin: 0px;
+        padding: 0px;
+        list-style-type: none;
+    }
+    
 }
 
 // Base Forms
