@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import { Link } from "react-router-dom";
 
+import UserBadge from "./UserBadge.jsx";
 import UserContext from "./UserContext.jsx";
 
 import "./AccountNav.scss";
@@ -17,12 +18,8 @@ const AccountNav = () => {
         <div className="acount-nav">
             {user ? (
                 <div className="account-nav__contain">
-                    <button
-                        className="account-nav__toggle btn-el"
-                        type="button"
-                        onClick={toggleNav}
-                    >
-                        {user.userName}
+                    <button className="account-nav__toggle" type="button" onClick={toggleNav}>
+                        <UserBadge />
                     </button>
 
                     <nav className="account-nav__navigation">

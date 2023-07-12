@@ -3,11 +3,11 @@ import { createUser, getUserData, userExists } from "../firebase/user.js";
 import { formatUserData } from "../util/formatting.js";
 
 import {
-  getAuth,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
+    getAuth,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithPopup,
+    signOut,
 } from "firebase/auth";
 
 /*
@@ -19,15 +19,15 @@ How to organize authentication and user functions
 */
 
 const signInUser = async () => {
-  // Sign in Firebase using popup auth and Google as the identity provider.
-  var provider = new GoogleAuthProvider();
-  await signInWithPopup(getAuth(), provider);
+    // Sign in Firebase using popup auth and Google as the identity provider.
+    var provider = new GoogleAuthProvider();
+    await signInWithPopup(getAuth(), provider);
 };
 
 // Signs-out of Friendly Chat.
 const signOutUser = () => {
-  // Sign out of Firebase.
-  signOut(getAuth());
+    // Sign out of Firebase.
+    signOut(getAuth());
 };
 
 // Returns the signed-in user's profile Pic URL.
@@ -41,23 +41,26 @@ const signOutUser = () => {
 // }
 
 const initAuthListener = async (setUserState) => {
-  onAuthStateChanged(getAuth(), async (authUser) => {
-    if (authUser) {
-      const user = await userExists(authUser.uid);
+    onAuthStateChanged(getAuth(), async (authUser) => {
+        if (authUser) {
+            console.log(authUser);
+            const user = await userExists(authUser.uid);
 
-      // If user does not exist in DB add one
-      if (!user) {
-        const formattedUserData = formatUserData(authUser);
-        createUser(formattedUserData);
-      }
+            // If user does not exist in DB add one
+            if (!user) {
+                const formattedUserData = formatUserData(authUser);
+                createUser(formattedUserData);
+            }
 
-      const userData = await getUserData(authUser.uid);
+            const userData = await getUserData(authUser.uid);
 
-      setUserState(userData);
-    } else {
-      setUserState(null);
-    }
-  });
+            userData.userPic = authUser.photoURL;
+
+            setUserState(userData);
+        } else {
+            setUserState(null);
+        }
+    });
 };
 
 export { initAuthListener, signInUser, signOutUser };

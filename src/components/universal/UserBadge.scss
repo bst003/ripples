@@ -1,0 +1,21 @@
+.user-badge{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    img{
+        border-radius: 100%;
+        max-width: 38px;
+    }
+
+    span{
+        font-size: 16px;
+        font-weight: 400;
+
+        a &{
+            font-weight: 700;
+        }
+
+    }
+
+}
