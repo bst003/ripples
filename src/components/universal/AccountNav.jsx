@@ -12,7 +12,19 @@ import { signInUser, signOutUser } from "../../firebase/authentication.js";
 const AccountNav = () => {
     const user = useContext(UserContext);
 
-    const toggleNav = () => {};
+    const toggleNav = (e) => {
+        e.preventDefault();
+
+        const toggle = e.currentTarget;
+        const navContain = toggle.parentElement;
+
+        const nav = navContain.querySelector(".account-nav__navigation");
+        if (nav.classList.contains("active")) {
+            nav.classList.remove("active");
+        } else {
+            nav.classList.add("active");
+        }
+    };
 
     return (
         <div className="acount-nav">
