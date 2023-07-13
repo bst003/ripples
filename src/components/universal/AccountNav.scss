@@ -58,6 +58,16 @@
     }
 
     @media screen and (max-width: 768px) {
+
+        &__contain{
+
+            .user-badge{
+                span{
+                    display: none;
+                }
+            }
+
+        }
         
         &__signin{ 
             &.btn-el{
