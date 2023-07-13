@@ -51,8 +51,8 @@ const AccountNav = () => {
                     </nav>
                 </div>
             ) : (
-                <button className="btn-el" type="button" onClick={signInUser}>
-                    Sign In with Google
+                <button className="account-nav__signin btn-el" type="button" onClick={signInUser}>
+                    Google Sign In
                 </button>
             )}
         </div>

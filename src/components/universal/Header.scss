@@ -32,4 +32,18 @@
     .site-search-bar{
         flex: 1; 
     }
+
+    @media screen and (max-width: 768px){
+        
+        .site-logo{
+            a{
+                font-size: 18px;
+            }
+
+            img{
+                max-width: 36px;
+            }
+        }
+
+    }
 }

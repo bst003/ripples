@@ -26,6 +26,12 @@
 
     --siteHorizonalPadding: 30px;
     --siteContentWidth: 1320px;
+
+    @media screen and (max-width: 768px) {
+
+        --siteHorizonalPadding: 20px;
+
+    }
 }
 
 // Site Base
