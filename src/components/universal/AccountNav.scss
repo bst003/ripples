@@ -15,7 +15,7 @@
         top: 100%;
         right: 0;
         min-width: 100%; 
-        padding: 8px;
+        padding: 8px 0px;
         background-color: var(--brandWhite);
         border: 1px solid var(--siteBorderColor);
         border-radius: var(--siteBorderRadius);
@@ -23,6 +23,38 @@
         &.active{
             display: block;
         }
+
+        li{ 
+
+            &:not(:last-of-type){
+                border-bottom: 1px solid var(--siteBorderColor);
+            }
+  
+            button{
+                padding: initial;
+                border: initial;
+                background-color: initial;
+            }
+
+            a,
+            button{
+                padding: 6px 8px;
+                display: block;
+                width: 100%;
+                color: var(--sitePrimaryFontColor); 
+                font-size: 18px;
+                text-align: left;
+                text-decoration: none; 
+
+                &:hover,
+                &:focus{
+                    background-color: var(--brandOffWhite);
+                }
+
+            }
+
+        }
+
     }
 
 }
