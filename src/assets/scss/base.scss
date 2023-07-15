@@ -60,6 +60,7 @@ body{
     padding: 0px var(--siteHorizonalPadding);
 
     &__inner{
+        margin: 0 auto;
         max-width: var(--siteContentWidth);
         width: 100%;
     }
