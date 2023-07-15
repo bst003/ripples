@@ -1,10 +1,24 @@
 .site-search-bar{
 
+    &__toggle{
+        display: none;
+        margin-left: auto; 
+        height: 44px;  
+        width: 44px;
+        background-color: var(--siteInputBg);
+        border: 1px solid var(--siteBorderColor);
+        border-radius: 100%;
+
+        &.active{
+            border-color: var(--brandDarkGray);
+        }
+
+    }
+
     label{
         position: relative;
         width: 100%;
     }
-
 
     input{
         position: relative;
@@ -14,6 +28,10 @@
     }
 
     button{
+        cursor: pointer;
+    }
+
+    .submit{
         position: absolute;
         z-index: 2;
         top: 50%;
@@ -24,4 +42,30 @@
         font-size: 26px; 
         font-weight: 700;
     }
-}
+
+    @media all and (max-width: 768px) {
+
+        &__toggle{
+            display: block;
+        }
+
+        &__form{
+            display: none; 
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+
+            &.active{
+                display: block;
+            }
+
+        }
+ 
+        label input{
+            border-radius: 0px;
+        }
+
+    }
+
+}   

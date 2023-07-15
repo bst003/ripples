@@ -10,11 +10,11 @@
     }
     
     &__navigation{
-        position: absolute;
+        position: absolute; 
         display: none;
         top: 100%;
         right: 0;
-        min-width: 100%; 
+        min-width: 140px; 
         padding: 8px 0px;
         background-color: var(--brandWhite);
         border: 1px solid var(--siteBorderColor);

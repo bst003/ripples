@@ -1,5 +1,6 @@
 .site-header{ 
-    background-color: var(--brandWhite);
+    position: relative;
+    background-color: var(--brandWhite); 
     border-bottom: 1px solid var(--siteBorderColor);
     padding: 8px var(--siteHorizonalPadding);
 
@@ -30,7 +31,7 @@
     }
 
     .site-search-bar{
-        flex: 1; 
+        flex: 1;  
     }
 
     @media screen and (max-width: 768px){

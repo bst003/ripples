@@ -1,7 +1,7 @@
 // Variables
 ////////////////////////////////////////////////
 
-:root{
+:root{ 
     --brandBlack: #111;
     --brandLightGray: #eee;
     --brandLightestGray: #dee2e6;
@@ -23,6 +23,8 @@
 
     --siteBorderColor: var(--brandLightestGray);
     --siteBorderRadius: 6px;
+
+    --siteInputBg: var(--brandOffWhite);
 
     --siteHorizonalPadding: 30px;
     --siteContentWidth: 1320px;
@@ -145,7 +147,7 @@ input{
     &:not([type="button"]),
     &:not([type="image"]),
     &:not([type="file"]){
-        background-color: var(--brandOffWhite);
+        background-color: var(--siteInputBg);
         border: 1px solid var(--siteBorderColor);
         border-radius: var(--siteBorderRadius);
         height: 44px; 

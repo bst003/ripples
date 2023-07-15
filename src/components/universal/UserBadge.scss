@@ -4,8 +4,9 @@
     gap: 8px;
 
     img{
+        border: 1px solid var(--siteBorderColor);
         border-radius: 100%;
-        max-width: 38px;
+        max-width: 44px;
     }
 
     span{
