@@ -1,13 +1,48 @@
 .sub-ripples-nav{
     margin: 40px 0px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
+
+    &__toggle{ 
+        display: none;
+
+        span{
+            content: "";
+            font-family: "Font Awesome 6 Free";
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+    }
+
+    &__list{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px; 
+    }
 
     a{
         padding: 8px 10px 7px;
-        font-size: 16px;
+        font-size: 15px;
+    }
+
+    @media screen and (min-width: 769px){
+
+        &__list{
+            display: flex!important;
+        }
+
+    }
+
+    @media screen and (max-width: 768px){
+
+        &__toggle{
+            display: block;
+        }
+
+        &__list{
+            display: none;
+        }
+
     }
 
 }
