@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { initAuthListener } from "./firebase/authentication.js";
 
-import MainLayout from "./components/universal/MainLayout.jsx";
+import MainLayout from "./templates/MainLayout.jsx";
 import UserContext from "./components/universal/UserContext.jsx";
 
 import Home from "./views/Home.jsx";

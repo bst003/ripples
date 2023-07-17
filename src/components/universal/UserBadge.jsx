@@ -11,7 +11,11 @@ const UserBadge = () => {
         <>
             {user ? (
                 <div className="user-badge">
-                    <img src={user.userPic} alt={user.userName + " profile pic"} />
+                    <img
+                        src={user.userPic}
+                        alt={user.userName + " profile pic"}
+                        referrerPolicy="no-referrer"
+                    />
                     <span>{user.userName}</span>
                 </div>
             ) : (
