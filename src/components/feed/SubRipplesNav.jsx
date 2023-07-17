@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { collection, getFirestore, getDocs, query } from "firebase/firestore/lite";
 
+import "./SubRipplesNav.scss";
+
 const SubRipplesNav = () => {
     const [subRipples, setSubRipples] = useState([]);
 
@@ -18,7 +20,7 @@ const SubRipplesNav = () => {
                 const subRipplesArr = [];
                 subRipplesQuerySnapshot.forEach((doc) => {
                     const timeObj = {
-                        id: doc.data().id,
+                        id: doc.id,
                         label: doc.data().label,
                         slug: doc.data().slug,
                     };
@@ -38,18 +40,22 @@ const SubRipplesNav = () => {
     return (
         <nav>
             {subRipples.length ? (
-                <ol className="leaderboard-list">
+                <ul className="sub-ripples-nav">
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link className="btn-el" to="/">
+                            Home
+                        </Link>
                     </li>
                     {subRipples.map((subRippleItem) => {
                         return (
                             <li key={subRippleItem.id}>
-                                <Link to={"/r/" + subRippleItem.slug}>{subRippleItem.label}</Link>
+                                <Link className="btn-el" to={"/r/" + subRippleItem.slug}>
+                                    {subRippleItem.label}
+                                </Link>
                             </li>
                         );
                     })}
-                </ol>
+                </ul>
             ) : (
                 <>Loading</>
             )}
