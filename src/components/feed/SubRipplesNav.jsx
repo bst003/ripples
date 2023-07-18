@@ -8,7 +8,6 @@ import "./SubRipplesNav.scss";
 
 const SubRipplesNav = () => {
     const [subRipples, setSubRipples] = useState([]);
-
     useEffect(() => {
         // initAuthListener(setUser);
         const getSubRipples = async () => {
@@ -37,11 +36,30 @@ const SubRipplesNav = () => {
         getSubRipples();
     }, []);
 
+    const toggleSubRipples = (e) => {
+        e.preventDefault();
+
+        const toggle = e.currentTarget;
+        const subRipplesList = toggle.nextSibling;
+
+        if (toggle.classList.contains("active")) {
+            toggle.classList.remove("active");
+            subRipplesList.classList.remove("active");
+        } else {
+            toggle.classList.add("active");
+            subRipplesList.classList.add("active");
+        }
+    };
+
     return (
         <nav>
             {subRipples.length ? (
                 <div className="sub-ripples-nav">
-                    <button className="sub-ripples-nav__toggle btn-el" type="button">
+                    <button
+                        className="sub-ripples-nav__toggle btn-el"
+                        type="button"
+                        onClick={toggleSubRipples}
+                    >
                         Communities <i className="fa-solid fa-bars"></i>
                     </button>
 
