@@ -56,7 +56,7 @@ const initAuthListener = async (setUserState) => {
 
             console.log(authUser);
 
-            userData.userPic = authUser.photoURL;
+            console.log(userData);
 
             setUserState(userData);
         } else {

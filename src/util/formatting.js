@@ -1,9 +1,10 @@
 const formatUserData = (user) => {
     console.log(user);
     return {
-        userId: user.uid,
+        googleId: user.uid,
         userEmail: user.email,
         userName: trimEmail(user.email),
+        userPic: user.photoURL,
     };
 };
 

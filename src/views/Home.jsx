@@ -1,8 +1,11 @@
+import Feed from "../components/feed/Feed";
+
 const Home = () => {
     return (
-        <div>
+        <>
             <h1>Front Page</h1>
-        </div>
+            <Feed />
+        </>
     );
 };
 
