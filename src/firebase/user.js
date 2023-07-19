@@ -37,8 +37,6 @@ const getUserData = async (userId) => {
             userObj.userName = doc.data().userName;
         });
 
-        console.log(userObj);
-
         return userObj;
     } catch (error) {
         console.log("Error fetching user data: " + error);
