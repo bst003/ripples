@@ -32,7 +32,7 @@ const getUserData = async (userId) => {
 
         const userObj = {};
         userQuerySnapshot.forEach((doc) => {
-            userObj.userId = doc.data().googleId;
+            userObj.googleId = doc.data().googleId;
             userObj.userPic = doc.data().userPic;
             userObj.userName = doc.data().userName;
         });
