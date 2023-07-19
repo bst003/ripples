@@ -54,10 +54,6 @@ const initAuthListener = async (setUserState) => {
 
             const userData = await getUserData(authUser.uid);
 
-            console.log(authUser);
-
-            console.log(userData);
-
             setUserState(userData);
         } else {
             setUserState(null);
