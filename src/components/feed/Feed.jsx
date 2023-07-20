@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import { getPosts } from "../../firebase/post.js";
 
+import Post from "./Post.jsx";
+
 import "./Feed.scss";
 
 /*
@@ -24,7 +26,11 @@ const Feed = () => {
             {posts.length > 0 ? (
                 <>
                     {posts.map((post) => {
-                        return <li key={post.id}>{post.title}</li>;
+                        return (
+                            <li key={post.id}>
+                                {post.title} <Post />
+                            </li>
+                        );
                     })}
                 </>
             ) : (
