@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import UserBadge from "./UserBadge.jsx";
 import UserContext from "./UserContext.jsx";
@@ -11,6 +11,15 @@ import { signInUser, signOutUser } from "../../firebase/authentication.js";
 
 const AccountNav = () => {
     const user = useContext(UserContext);
+
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        const nav = document.querySelector(".account-nav__navigation");
+        if (nav && nav.classList.contains("active")) {
+            nav.classList.remove("active");
+        }
+    }, [pathname]);
 
     const toggleNav = (e) => {
         e.preventDefault();
