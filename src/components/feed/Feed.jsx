@@ -13,7 +13,7 @@ Parts of Feed
 */
 
 const Feed = () => {
-    const [posts, setPosts] = useState(null);
+    const [posts, setPosts] = useState([]);
     const getPosts = async (userGoogleId = null, subRippleId = null) => {
         try {
             if (userGoogleId) {
@@ -31,6 +31,7 @@ const Feed = () => {
             const postsArray = [];
             postsQuerySnapshot.forEach((doc) => {
                 const postObj = {
+                    id: doc.id,
                     title: doc.data().title,
                     content: doc.data().content,
                     userGoogleId: doc.data().userGoogleId,
@@ -41,7 +42,7 @@ const Feed = () => {
                 postsArray.push(postObj);
             });
 
-            return postsArray;
+            setPosts(postsArray);
         } catch (error) {
             console.log("Error fetching posts: " + error);
         }
@@ -49,9 +50,25 @@ const Feed = () => {
 
     useEffect(() => {
         getPosts();
+        // const requestedPosts = getPosts();
+        // console.log(requestedPosts);
+
+        // setPosts(requestedPosts);
     }, []);
 
-    return <section className="posts-feed">Feed here</section>;
+    return (
+        <section className="posts-feed">
+            {posts.length > 0 ? (
+                <>
+                    {posts.map((post) => {
+                        return <li key={post.id}>{post.title}</li>;
+                    })}
+                </>
+            ) : (
+                <>Loading</>
+            )}
+        </section>
+    );
 };
 
 export default Feed;
