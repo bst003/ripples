@@ -1,0 +1,23 @@
+.pc{
+    display: flex;
+    column-gap: 2.6%;
+
+    &:not(:last-of-type){
+        margin: 0px 0px 30px; 
+    }
+
+    &__post{
+        width: 42%;
+        background-color: var(--brandWhite);
+        border-radius: var(--siteBorderRadius);
+        border: 1px solid var(--siteBorderColor);
+    }
+
+    &__comments{
+        width: 55%; 
+        background-color: var(--brandWhite);
+        border-radius: var(--siteBorderRadius);
+        border: 1px solid var(--siteBorderColor);
+    }
+
+}

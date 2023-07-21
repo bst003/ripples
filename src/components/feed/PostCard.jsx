@@ -14,7 +14,7 @@ const PostCard = (props) => {
                 {userGoogleId}
                 {timestamp}
             </div>
-            <div className="pc__comments"></div>
+            <div className="pc__comments"> comments here</div>
         </div>
     );
 };
