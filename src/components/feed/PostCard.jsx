@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+import PostHeader from "./PostHeader.jsx";
+
 import "./PostCard.scss";
 
 const PostCard = (props) => {
@@ -8,6 +10,7 @@ const PostCard = (props) => {
     return (
         <div className="post-card pc">
             <div className="pc__post">
+                <PostHeader userGoogleId={userGoogleId} />
                 {id}
                 {title}
                 {content}
