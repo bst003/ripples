@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { getPosts } from "../../firebase/post.js";
 
-import Post from "./Post.jsx";
+import PostCard from "./PostCard.jsx";
 
 import "./Feed.scss";
 
@@ -27,9 +27,14 @@ const Feed = () => {
                 <>
                     {posts.map((post) => {
                         return (
-                            <li key={post.id}>
-                                {post.title} <Post />
-                            </li>
+                            <PostCard
+                                key={post.id}
+                                id={post.id}
+                                title={post.title}
+                                content={post.content}
+                                userGoogleId={post.userGoogleId}
+                                timestamp={post.timestamp}
+                            />
                         );
                     })}
                 </>
