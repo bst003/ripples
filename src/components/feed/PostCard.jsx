@@ -10,7 +10,7 @@ const PostCard = (props) => {
     return (
         <div className="post-card pc">
             <div className="pc__post">
-                <PostHeader userGoogleId={userGoogleId} />
+                <PostHeader userGoogleId={userGoogleId} timestamp={timestamp} />
                 {id}
                 {title}
                 {content}
