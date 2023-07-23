@@ -1,4 +1,4 @@
-import { createUser, getUserData, userExists } from "../firebase/user.js";
+import { createUser, setUserDataAsState, userExists } from "../firebase/user.js";
 
 import { formatUserData } from "../util/formatting.js";
 
@@ -52,9 +52,11 @@ const initAuthListener = async (setUserState) => {
                 createUser(formattedUserData);
             }
 
-            const userData = await getUserData(authUser.uid);
+            // const userData = await getUserData(authUser.uid);
 
-            setUserState(userData);
+            // setUserState(userData);
+
+            setUserDataAsState(setUserState, authUser.uid);
         } else {
             setUserState(null);
         }

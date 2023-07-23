@@ -43,6 +43,12 @@ const getUserData = async (userId) => {
     }
 };
 
+const setUserDataAsState = async (setState, userGoogleId) => {
+    const data = await getUserData(userGoogleId);
+
+    setState(data);
+};
+
 const userExists = async (authId) => {
     console.log(authId);
     try {
@@ -63,4 +69,4 @@ const userExists = async (authId) => {
     }
 };
 
-export { createUser, getUserData, userExists };
+export { createUser, setUserDataAsState, userExists };

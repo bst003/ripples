@@ -4,35 +4,29 @@ import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
-import { getUserData } from "../../firebase/user.js";
+import { setUserDataAsState } from "../../firebase/user.js";
 
 import UserContext from "./UserContext.jsx";
 
 import "./UserBadge.scss";
-
-/*
-
-Checks if 
-
-*/
 
 const UserBadge = (props) => {
     const { userGoogleId, isLink } = props;
 
     const userData = useContext(UserContext);
 
-    const passUserData = async (setState) => {
-        const data = await getUserData(userGoogleId);
+    // const passUserData = async (setState) => {
+    //     const data = await getUserData(userGoogleId);
 
-        setState(data);
-    };
+    //     setState(data);
+    // };
 
     const [user, setUser] = useState(null);
     useEffect(() => {
         if (!userGoogleId) {
             setUser(userData);
         } else {
-            passUserData(setUser);
+            setUserDataAsState(setUser, userGoogleId);
         }
     }, []);
 
