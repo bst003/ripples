@@ -15,12 +15,6 @@ const UserBadge = (props) => {
 
     const userData = useContext(UserContext);
 
-    // const passUserData = async (setState) => {
-    //     const data = await getUserData(userGoogleId);
-
-    //     setState(data);
-    // };
-
     const [user, setUser] = useState(null);
     useEffect(() => {
         if (!userGoogleId) {
