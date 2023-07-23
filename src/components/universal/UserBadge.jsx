@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 
 import { getUserData } from "../../firebase/user.js";
@@ -15,7 +17,7 @@ Checks if
 */
 
 const UserBadge = (props) => {
-    const { userGoogleId } = props;
+    const { userGoogleId, isLink } = props;
 
     const userData = useContext(UserContext);
 
@@ -34,26 +36,31 @@ const UserBadge = (props) => {
         }
     }, []);
 
-    return (
-        <>
-            {user ? (
-                <div className="user-badge">
-                    <img
-                        src={user.userPic}
-                        alt={user.userName + " profile pic"}
-                        referrerPolicy="no-referrer"
-                    />
-                    <span>{user.userName}</span>
-                </div>
-            ) : (
-                <></>
-            )}
-        </>
-    );
+    const renderBadgeContents = () => {
+        const contents = (
+            <div className="user-badge">
+                <img
+                    src={user.userPic}
+                    alt={user.userName + " profile pic"}
+                    referrerPolicy="no-referrer"
+                />
+                <span>{user.userName}</span>
+            </div>
+        );
+
+        if (isLink) {
+            return <Link to={"/profile/" + user.userName}>{contents}</Link>;
+        }
+
+        return contents;
+    };
+
+    return <>{user ? renderBadgeContents() : <></>}</>;
 };
 
 UserBadge.propTypes = {
     userGoogleId: PropTypes.string,
+    isLink: PropTypes.bool,
 };
 
 export default UserBadge;

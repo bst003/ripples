@@ -40,7 +40,7 @@ const AccountNav = () => {
             {user ? (
                 <div className="account-nav__contain">
                     <button className="account-nav__toggle" type="button" onClick={toggleNav}>
-                        <UserBadge />
+                        <UserBadge isLink={null} />
                     </button>
 
                     <nav className="account-nav__navigation">

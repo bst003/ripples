@@ -8,7 +8,7 @@ const PostHeader = (props) => {
     return (
         <div className="pc__header">
             t - {userGoogleId}
-            <UserBadge userGoogleId={userGoogleId} />
+            <UserBadge userGoogleId={userGoogleId} isLink="true" />
         </div>
     );
 };
