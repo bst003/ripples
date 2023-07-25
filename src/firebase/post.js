@@ -25,7 +25,7 @@ const getPosts = async (userGoogleId = null, subRippleId = null, offset = null, 
                 title: doc.data().title,
                 content: doc.data().content,
                 userGoogleId: doc.data().userGoogleId,
-                timestamp: doc.data().timestamp.seconds,
+                timestamp: doc.data().timestamp.toMillis(),
             };
 
             console.log(postObj);
