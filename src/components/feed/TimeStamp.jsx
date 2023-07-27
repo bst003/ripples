@@ -1,9 +1,5 @@
 import PropTypes from "prop-types";
 
-/*
-    Split formatTimeStamp into multiple functions
-*/
-
 const TimeStamp = (props) => {
     const { timestamp } = props;
 
@@ -32,7 +28,7 @@ const TimeStamp = (props) => {
         } else if (minPassed < 60 * 24 * 7) {
             suffix = "day";
         } else {
-            suffix = "week";
+            suffix = "wk";
         }
 
         return suffix;
@@ -41,32 +37,11 @@ const TimeStamp = (props) => {
     const getFormattedTimeStamp = () => {
         const today = Math.abs(new Date().getTime());
 
-        // const test = parseInt((today - timestamp * 1000) / (1000 * 60 * 60 * 24), 10);
-
-        // const daysPassed = (today - timestamp) / (1000 * 60 * 60 * 24);
-
-        // const hoursPassed = (today - timestamp) / (1000 * 60 * 60);
         const minPassed = (today - timestamp) / (1000 * 60);
 
         const suffix = setTimestampSuffix(minPassed);
 
         const digits = setTimeStampDigits(minPassed);
-
-        console.log(minPassed);
-
-        console.log(digits);
-
-        console.log(suffix);
-
-        // console.log(new Date(timestamp));
-
-        // console.log("stamp: " + timestamp);
-
-        // console.log("today: " + today);
-
-        // console.log("diff: " + hoursPassed);
-
-        console.log("-----------------");
 
         return digits + " " + suffix;
     };

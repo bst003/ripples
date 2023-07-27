@@ -4,6 +4,8 @@ import TimeStamp from "./TimeStamp.jsx";
 
 import UserBadge from "../universal/UserBadge.jsx";
 
+import "./PostHeader.scss";
+
 const PostHeader = (props) => {
     const { userGoogleId, timestamp } = props;
 

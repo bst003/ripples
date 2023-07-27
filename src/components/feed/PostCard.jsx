@@ -11,8 +11,12 @@ const PostCard = (props) => {
         <div className="post-card pc">
             <div className="pc__post">
                 <PostHeader userGoogleId={userGoogleId} timestamp={timestamp} />
+
+                <div className="pc__title">
+                    <h2>{title}</h2>
+                </div>
+
                 {id}
-                {title}
                 {content}
                 {userGoogleId}
                 {timestamp}
