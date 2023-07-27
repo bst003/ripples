@@ -2,10 +2,14 @@ import PropTypes from "prop-types";
 
 import PostHeader from "./PostHeader.jsx";
 
+import PostBody from "./PostBody.jsx";
+
 import "./PostCard.scss";
 
 const PostCard = (props) => {
     const { id, title, content, userGoogleId, timestamp } = props;
+
+    console.log(id);
 
     return (
         <div className="post-card pc">
@@ -16,10 +20,7 @@ const PostCard = (props) => {
                     <h2>{title}</h2>
                 </div>
 
-                {id}
-                {content}
-                {userGoogleId}
-                {timestamp}
+                <PostBody content={content} />
             </div>
             <div className="pc__comments"> comments here</div>
         </div>
