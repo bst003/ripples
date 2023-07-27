@@ -4,12 +4,12 @@ import PostHeader from "./PostHeader.jsx";
 
 import PostBody from "./PostBody.jsx";
 
+import PostCommentsFeed from "./PostCommentsFeed.jsx";
+
 import "./PostCard.scss";
 
 const PostCard = (props) => {
     const { id, title, content, userGoogleId, timestamp } = props;
-
-    console.log(id);
 
     return (
         <div className="post-card pc">
@@ -22,7 +22,9 @@ const PostCard = (props) => {
 
                 <PostBody content={content} />
             </div>
-            <div className="pc__comments"> comments here</div>
+            <div className="pc__comments">
+                <PostCommentsFeed id={id} />
+            </div>
         </div>
     );
 };

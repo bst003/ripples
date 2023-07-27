@@ -17,6 +17,8 @@
 
     &__comments{
         width: 55%; 
+        padding: var(--pcPadding);
+        border-bottom: 1px solid var(--siteBorderColor);
         background-color: var(--brandWhite);
         border-radius: var(--siteBorderRadius);
         border: 1px solid var(--siteBorderColor);
