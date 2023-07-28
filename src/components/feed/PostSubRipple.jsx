@@ -16,7 +16,7 @@ const PostSubRipple = (props) => {
 };
 
 PostSubRipple.propTypes = {
-    id: PropTypes.string,
+    forumId: PropTypes.string,
 };
 
 export default PostSubRipple;

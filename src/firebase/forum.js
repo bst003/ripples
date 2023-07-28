@@ -2,15 +2,15 @@ import { collection, getFirestore, getDocs, query, where } from "firebase/firest
 
 const getForum = async (subRippleId = null, setForumState) => {
     try {
-        const postsQuery = query(
+        const forumQuery = query(
             collection(getFirestore(), "forums"),
             where("__name__", "==", subRippleId)
         );
 
-        const postsQuerySnapshot = await getDocs(postsQuery);
+        const forumQuerySnapshot = await getDocs(forumQuery);
 
         const forumObj = {};
-        postsQuerySnapshot.forEach((doc) => {
+        forumQuerySnapshot.forEach((doc) => {
             console.log(doc.data());
 
             forumObj.label = doc.data().label;
@@ -25,4 +25,27 @@ const getForum = async (subRippleId = null, setForumState) => {
     }
 };
 
-export { getForum };
+const getForums = async (setForumsState) => {
+    try {
+        const forumsQuery = query(collection(getFirestore(), "forums"));
+
+        const forumsQuerySnapshot = await getDocs(forumsQuery);
+
+        const forumsArr = [];
+        forumsQuerySnapshot.forEach((doc) => {
+            const forumObj = {
+                id: doc.id,
+                label: doc.data().label,
+                slug: doc.data().slug,
+            };
+
+            forumsArr.push(forumObj);
+        });
+
+        setForumsState(forumsArr);
+    } catch (error) {
+        console.log("Error fetching forums: " + error);
+    }
+};
+
+export { getForum, getForums };
