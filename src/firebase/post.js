@@ -25,6 +25,7 @@ const getPosts = async (userGoogleId = null, subRippleId = null, offset = null, 
                 title: doc.data().title,
                 content: doc.data().content,
                 userGoogleId: doc.data().userGoogleId,
+                forumId: doc.data().forumId,
                 timestamp: doc.data().timestamp.toMillis(),
             };
 

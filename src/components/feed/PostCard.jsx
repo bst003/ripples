@@ -6,15 +6,19 @@ import PostBody from "./PostBody.jsx";
 
 import PostCommentsFeed from "./PostCommentsFeed.jsx";
 
+import PostSubRipple from "./PostSubRipple.jsx";
+
 import "./PostCard.scss";
 
 const PostCard = (props) => {
-    const { id, title, content, userGoogleId, timestamp } = props;
+    const { id, title, content, userGoogleId, forumId, timestamp } = props;
 
     return (
         <div className="post-card pc">
             <div className="pc__post">
                 <PostHeader userGoogleId={userGoogleId} timestamp={timestamp} />
+
+                <PostSubRipple forumId={forumId} />
 
                 <div className="pc__title">
                     <h2>{title}</h2>
@@ -34,6 +38,7 @@ PostCard.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
     userGoogleId: PropTypes.string,
+    forumId: PropTypes.string,
     timestamp: PropTypes.number,
 };
 

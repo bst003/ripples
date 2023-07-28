@@ -33,6 +33,7 @@ const Feed = () => {
                                 title={post.title}
                                 content={post.content}
                                 userGoogleId={post.userGoogleId}
+                                forumId={post.forumId}
                                 timestamp={post.timestamp}
                             />
                         );
