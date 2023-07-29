@@ -2,38 +2,15 @@ import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import { collection, getFirestore, getDocs, query } from "firebase/firestore/lite";
+import { getForums } from "../../firebase/forum";
 
 import "./SubRipplesNav.scss";
 
 const SubRipplesNav = () => {
     const [subRipples, setSubRipples] = useState([]);
+
     useEffect(() => {
-        // initAuthListener(setUser);
-        const getSubRipples = async () => {
-            try {
-                const subRipplesQuery = query(collection(getFirestore(), "forums"));
-
-                const subRipplesQuerySnapshot = await getDocs(subRipplesQuery);
-
-                const subRipplesArr = [];
-                subRipplesQuerySnapshot.forEach((doc) => {
-                    const timeObj = {
-                        id: doc.id,
-                        label: doc.data().label,
-                        slug: doc.data().slug,
-                    };
-
-                    subRipplesArr.push(timeObj);
-                });
-
-                setSubRipples(subRipplesArr);
-            } catch (error) {
-                console.log("Error fetching times: " + error);
-            }
-        };
-
-        getSubRipples();
+        getForums(setSubRipples);
     }, []);
 
     const toggleSubRipples = (e) => {
