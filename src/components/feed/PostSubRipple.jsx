@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import { getForum } from "../../firebase/forum";
 
 import PropTypes from "prop-types";
@@ -10,9 +12,21 @@ const PostSubRipple = (props) => {
     const [forum, setForum] = useState(null);
     useEffect(() => {
         getForum(forumId, setForum);
-    }, []);
+    }, [forumId]);
 
-    return <div className="pc__sub-ripple">{forum ? <>{forum.label}</> : <></>}</div>;
+    const PostSubRippleContent = () => {
+        if (forum) {
+            return (
+                <div className="pc__sub-ripple">
+                    <Link to={"/r/" + forum.slug}>{"/r/" + forum.label}</Link>
+                </div>
+            );
+        } else {
+            return <></>;
+        }
+    };
+
+    return <>{PostSubRippleContent()}</>;
 };
 
 PostSubRipple.propTypes = {
