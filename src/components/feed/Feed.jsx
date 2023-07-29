@@ -21,9 +21,9 @@ const Feed = () => {
         getPosts(null, null, null, setPosts);
     }, []);
 
-    return (
-        <section className="posts-feed">
-            {posts.length > 0 ? (
+    const feedContent = () => {
+        if (posts.length > 0) {
+            return (
                 <>
                     {posts.map((post) => {
                         return (
@@ -39,11 +39,13 @@ const Feed = () => {
                         );
                     })}
                 </>
-            ) : (
-                <>Loading</>
-            )}
-        </section>
-    );
+            );
+        } else {
+            return <>Loading</>;
+        }
+    };
+
+    return <section className="posts-feed">{feedContent()}</section>;
 };
 
 export default Feed;
