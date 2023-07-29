@@ -26,12 +26,16 @@
  
     &__title{
         padding: var(--pcPadding);
-        border-bottom: 1px solid var(--siteBorderColor);
 
         > *{
             margin: 0px;
         }
 
+    }
+
+    &__base{
+        padding: var(--pcPadding);
+        border-bottom: 1px solid var(--siteBorderColor);
     }
 
 }

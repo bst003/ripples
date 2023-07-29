@@ -10,7 +10,7 @@ const PostHeader = (props) => {
     const { userGoogleId, timestamp } = props;
 
     return (
-        <div className="pc__header">
+        <div className="pc__header pc__base">
             <UserBadge userGoogleId={userGoogleId} isLink={true} />
 
             <TimeStamp timestamp={timestamp} />

@@ -5,7 +5,7 @@ import "./PostBody.scss";
 const PostBody = (props) => {
     const { content } = props;
 
-    return <div className="pc__body">{content}</div>;
+    return <div className="pc__body pc__base">{content}</div>;
 };
 
 PostBody.propTypes = {

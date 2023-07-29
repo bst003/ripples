@@ -2,8 +2,9 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    background-color: var(--brandOffWhite);
     padding: var(--pcPadding);
-    border-bottom: 1px solid var(--siteBorderColor);
+    border-radius: var(--siteBorderRadius) var(--siteBorderRadius) 0px 0px;
 
     .timestamp{
         margin-left: auto;

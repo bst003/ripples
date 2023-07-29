@@ -17,7 +17,7 @@ const PostSubRipple = (props) => {
     const PostSubRippleContent = () => {
         if (forum) {
             return (
-                <div className="pc__sub-ripple">
+                <div className="pc__sub-ripple pc__base">
                     <Link to={"/r/" + forum.slug}>{"/r/" + forum.label}</Link>
                 </div>
             );

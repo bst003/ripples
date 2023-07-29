@@ -2,6 +2,16 @@ import PropTypes from "prop-types";
 
 import "./PostCommentsFeed.scss";
 
+/*
+
+Fields needed
+    - content (rename comment)
+    - userGoogleId
+    - timestamp
+    - postID
+
+*/
+
 const PostCommentsFeed = (props) => {
     const { id } = props;
 
