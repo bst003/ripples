@@ -4,6 +4,8 @@ import { getPosts } from "../../firebase/post.js";
 
 import PostCard from "./PostCard.jsx";
 
+import LoadingIcon from "../misc/LoadingIcon.jsx";
+
 import "./Feed.scss";
 
 /*
@@ -33,7 +35,7 @@ const Feed = () => {
 
     const feedContent = () => {
         if (isLoading) {
-            return <>Loading</>;
+            return <LoadingIcon />;
         } else {
             if (posts.length > 0) {
                 return (

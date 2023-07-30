@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import { getComments } from "../../firebase/comment";
 
+import LoadingIcon from "../misc/LoadingIcon.jsx";
+
 import "./PostCommentsFeed.scss";
 
 /*
@@ -38,7 +40,7 @@ const PostCommentsFeed = (props) => {
 
     const PostCommentsFeedContent = () => {
         if (isLoading) {
-            return <>Loading</>;
+            return <LoadingIcon />;
         } else {
             if (comments.length > 0) {
                 const commentItems = comments.map((comment) => {
