@@ -15,33 +15,47 @@ Parts of Feed
 */
 
 const Feed = () => {
+    const [isLoading, setIsLoading] = useState(false);
+
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        getPosts(setPosts);
+        // getPosts(setPosts);
+        setIsLoading(true);
+
+        const getPostsUpdateLoad = async () => {
+            await getPosts(setPosts);
+            setIsLoading(false);
+        };
+
+        getPostsUpdateLoad();
     }, []);
 
     const feedContent = () => {
-        if (posts.length > 0) {
-            return (
-                <>
-                    {posts.map((post) => {
-                        return (
-                            <PostCard
-                                key={post.id}
-                                id={post.id}
-                                title={post.title}
-                                content={post.content}
-                                userGoogleId={post.userGoogleId}
-                                forumId={post.forumId}
-                                timestamp={post.timestamp}
-                            />
-                        );
-                    })}
-                </>
-            );
-        } else {
+        if (isLoading) {
             return <>Loading</>;
+        } else {
+            if (posts.length > 0) {
+                return (
+                    <>
+                        {posts.map((post) => {
+                            return (
+                                <PostCard
+                                    key={post.id}
+                                    id={post.id}
+                                    title={post.title}
+                                    content={post.content}
+                                    userGoogleId={post.userGoogleId}
+                                    forumId={post.forumId}
+                                    timestamp={post.timestamp}
+                                />
+                            );
+                        })}
+                    </>
+                );
+            } else {
+                return <>No posts found</>;
+            }
         }
     };
 
