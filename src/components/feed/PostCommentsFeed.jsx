@@ -14,6 +14,9 @@ Fields needed
     - timestamp
     - postId
 
+- Add way to differentiate between no comments founds and loading
+- Move any conditional rendering out of return and into method (NOT FOR HERE, BUT EVERYWHERE)
+
 */
 
 const PostCommentsFeed = (props) => {
