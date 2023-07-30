@@ -1,23 +1,38 @@
 import { collection, getFirestore, getDocs, query, where } from "firebase/firestore/lite";
 
-const getForum = async (setForumState, subRippleId = null) => {
+const getForum = async (setForumState, subRippleId = null, subRippleSlug = null) => {
     try {
-        const forumQuery = query(
-            collection(getFirestore(), "forums"),
-            where("__name__", "==", subRippleId)
-        );
+        let forumQuery;
+
+        if (subRippleSlug) {
+            forumQuery = query(
+                collection(getFirestore(), "forums"),
+                where("slug", "==", subRippleSlug)
+            );
+        }
+
+        if (subRippleId) {
+            forumQuery = query(
+                collection(getFirestore(), "forums"),
+                where("__name__", "==", subRippleId)
+            );
+        }
+
+        // const forumQuery = query(collection(getFirestore(), "forums"), slugQuery, idQuery);
 
         const forumQuerySnapshot = await getDocs(forumQuery);
 
         const forumObj = {};
         forumQuerySnapshot.forEach((doc) => {
+            console.log(doc.data());
+
             forumObj.label = doc.data().label;
             forumObj.slug = doc.data().slug;
         });
 
         setForumState(forumObj);
     } catch (error) {
-        console.log("Error fetching forums: " + error);
+        console.log("Error fetching forum: " + error);
     }
 };
 
