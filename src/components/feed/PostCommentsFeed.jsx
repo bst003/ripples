@@ -22,22 +22,33 @@ Fields needed
 const PostCommentsFeed = (props) => {
     const { postId } = props;
 
-    console.log(postId);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [comments, setComment] = useState([]);
     useEffect(() => {
-        getComments(setComment, null, postId);
+        setIsLoading(true);
+
+        const getCommentsUpdateLoad = async () => {
+            await getComments(setComment, null, postId);
+            setIsLoading(false);
+        };
+
+        getCommentsUpdateLoad();
     }, [postId]);
 
     const PostCommentsFeedContent = () => {
-        if (comments.length > 0) {
-            const commentItems = comments.map((comment) => {
-                return <li key={comment.id}>{comment.content}</li>;
-            });
-
-            return commentItems;
-        } else {
+        if (isLoading) {
             return <>Loading</>;
+        } else {
+            if (comments.length > 0) {
+                const commentItems = comments.map((comment) => {
+                    return <li key={comment.id}>{comment.content}</li>;
+                });
+
+                return commentItems;
+            } else {
+                return <>No comments found</>;
+            }
         }
     };
 
