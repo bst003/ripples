@@ -1,6 +1,6 @@
 import { collection, getFirestore, getDocs, limit, query } from "firebase/firestore/lite";
 
-const getPosts = async (userGoogleId = null, subRippleId = null, offset = null, setPostState) => {
+const getPosts = async (setPostState, userGoogleId = null, subRippleId = null, offset = null) => {
     try {
         if (userGoogleId) {
             console.log(userGoogleId);

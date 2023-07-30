@@ -27,7 +27,7 @@ const PostCard = (props) => {
                 <PostBody content={content} />
             </div>
             <div className="pc__comments">
-                <PostCommentsFeed id={id} />
+                <PostCommentsFeed postId={id} />
             </div>
         </div>
     );

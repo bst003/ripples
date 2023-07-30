@@ -1,6 +1,6 @@
 import { collection, getFirestore, getDocs, query, where } from "firebase/firestore/lite";
 
-const getForum = async (subRippleId = null, setForumState) => {
+const getForum = async (setForumState, subRippleId = null) => {
     try {
         const forumQuery = query(
             collection(getFirestore(), "forums"),

@@ -18,7 +18,7 @@ const Feed = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        getPosts(null, null, null, setPosts);
+        getPosts(setPosts);
     }, []);
 
     const feedContent = () => {

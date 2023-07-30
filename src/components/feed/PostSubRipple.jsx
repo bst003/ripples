@@ -11,7 +11,7 @@ const PostSubRipple = (props) => {
 
     const [forum, setForum] = useState(null);
     useEffect(() => {
-        getForum(forumId, setForum);
+        getForum(setForum, forumId);
     }, [forumId]);
 
     const PostSubRippleContent = () => {

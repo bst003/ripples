@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+
 import PropTypes from "prop-types";
+
+import { getComments } from "../../firebase/comment";
 
 import "./PostCommentsFeed.scss";
 
@@ -8,20 +12,37 @@ Fields needed
     - content (rename comment)
     - userGoogleId
     - timestamp
-    - postID
+    - postId
 
 */
 
 const PostCommentsFeed = (props) => {
-    const { id } = props;
+    const { postId } = props;
 
-    console.log(id);
+    console.log(postId);
 
-    return <div className="pc__comments-feed">feed here</div>;
+    const [comments, setComment] = useState([]);
+    useEffect(() => {
+        getComments(setComment, null, postId);
+    }, [postId]);
+
+    const PostCommentsFeedContent = () => {
+        if (comments.length > 0) {
+            const commentItems = comments.map((comment) => {
+                return <li key={comment.id}>{comment.content}</li>;
+            });
+
+            return commentItems;
+        } else {
+            return <>Loading</>;
+        }
+    };
+
+    return <div className="pc__comments-feed">{PostCommentsFeedContent()}</div>;
 };
 
 PostCommentsFeed.propTypes = {
-    id: PropTypes.string,
+    postId: PropTypes.string,
 };
 
 export default PostCommentsFeed;
