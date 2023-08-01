@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 import PropTypes from "prop-types";
 
-import { getComments } from "../../firebase/comment";
+import { getComments } from "../../../firebase/comment";
 
-import LoadingIcon from "../misc/LoadingIcon.jsx";
+import LoadingIcon from "../../misc/LoadingIcon.jsx";
 
 import "./PostCommentsFeed.scss";
 

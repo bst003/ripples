@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { getPosts } from "../../firebase/post.js";
 
-import PostCard from "./PostCard.jsx";
+import PostCard from "./post-card/PostCard.jsx";
 
 import LoadingIcon from "../misc/LoadingIcon.jsx";
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import { getForum } from "../../firebase/forum";
+import { getForum } from "../../../firebase/forum";
 
 import PropTypes from "prop-types";
 

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-import TimeStamp from "./TimeStamp.jsx";
+import TimeStamp from "../TimeStamp.jsx";
 
-import UserBadge from "../universal/UserBadge.jsx";
+import UserBadge from "../../universal/UserBadge.jsx";
 
 import "./PostHeader.scss";
 
