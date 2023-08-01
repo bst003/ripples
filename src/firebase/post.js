@@ -8,7 +8,7 @@ const getPosts = async (
     count = 10
 ) => {
     try {
-        let postsQuery;
+        let postsQuery = query(collection(getFirestore(), "posts"), limit(count));
 
         if (userGoogleId) {
             // console.log(userGoogleId);
@@ -19,7 +19,10 @@ const getPosts = async (
             );
         }
 
+        console.log("this is  atest");
+
         if (subRippleId) {
+            console.log("we have a sub rippkle id");
             postsQuery = query(
                 collection(getFirestore(), "posts"),
                 where("forumId", "==", subRippleId),
@@ -30,8 +33,6 @@ const getPosts = async (
         if (offset) {
             console.log(offset);
         }
-
-        postsQuery = query(collection(getFirestore(), "posts"), limit(10));
 
         const postsQuerySnapshot = await getDocs(postsQuery);
 

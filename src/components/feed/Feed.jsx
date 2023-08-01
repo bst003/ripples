@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import PropTypes from "prop-types";
+
 import { getPosts } from "../../firebase/post.js";
 
 import PostCard from "./PostCard.jsx";
@@ -16,22 +18,28 @@ Parts of Feed
     Load More Btn
 */
 
-const Feed = () => {
+const Feed = (props) => {
+    const { subRippleId } = props;
+
     const [isLoading, setIsLoading] = useState(false);
 
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        // getPosts(setPosts);
         setIsLoading(true);
 
+        let idParam = null;
+        if (subRippleId) {
+            idParam = subRippleId;
+        }
+
         const getPostsUpdateLoad = async () => {
-            await getPosts(setPosts);
+            await getPosts(setPosts, null, idParam);
             setIsLoading(false);
         };
 
         getPostsUpdateLoad();
-    }, []);
+    }, [subRippleId]);
 
     const feedContent = () => {
         if (isLoading) {
@@ -62,6 +70,10 @@ const Feed = () => {
     };
 
     return <section className="posts-feed">{feedContent()}</section>;
+};
+
+Feed.propTypes = {
+    subRippleId: PropTypes.string,
 };
 
 export default Feed;
