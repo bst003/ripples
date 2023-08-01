@@ -2,26 +2,31 @@ import { collection, getFirestore, getDocs, where, query } from "firebase/firest
 
 const getComments = async (setCommentState, userGoogleId = null, postId = null, offset = null) => {
     try {
-        let userIdQuery = "";
+        let commentsQuery;
+
         if (userGoogleId) {
-            userIdQuery = where("userGoogleId", "==", userGoogleId);
+            commentsQuery = query(
+                collection(getFirestore(), "comments"),
+                where("userGoogleId", "==", userGoogleId)
+            );
         }
 
-        let postIdQuery = "";
         if (postId) {
-            console.log(postId);
-            postIdQuery = where("postId", "==", postId);
+            commentsQuery = query(
+                collection(getFirestore(), "comments"),
+                where("postId", "==", postId)
+            );
         }
 
         if (offset) {
             console.log(offset);
         }
 
-        const commentsQuery = query(
-            collection(getFirestore(), "comments"),
-            userIdQuery,
-            postIdQuery
-        );
+        // const commentsQuery = query(
+        //     collection(getFirestore(), "comments"),
+        //     userIdQuery,
+        //     postIdQuery
+        // );
 
         const commentsQuerySnapshot = await getDocs(commentsQuery);
 
