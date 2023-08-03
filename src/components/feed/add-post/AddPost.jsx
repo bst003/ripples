@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import AddPostForm from "./AddPostForm";
 import AddPostModal from "./AddPostModal";
 
 const AddPost = () => {
@@ -17,7 +18,9 @@ const AddPost = () => {
                     Add Post
                 </button>
             </div>
-            <AddPostModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
+            <AddPostModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+                <AddPostForm />
+            </AddPostModal>
         </>
     );
 };

@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import PropTypes from "prop-types";
 
 const AddPostModal = (props) => {
-    const { modalIsOpen, closeModal } = props;
+    const { modalIsOpen, closeModal, children } = props;
 
     Modal.setAppElement("#root");
 
@@ -19,7 +19,7 @@ const AddPostModal = (props) => {
                 <span className="screen-reader-text">close</span>
                 <i className="fas fa-times"></i>
             </button>
-            Form will go here
+            {children}
         </Modal>
     );
 };
@@ -27,6 +27,7 @@ const AddPostModal = (props) => {
 AddPostModal.propTypes = {
     modalIsOpen: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
+    children: PropTypes.element,
 };
 
 export default AddPostModal;
