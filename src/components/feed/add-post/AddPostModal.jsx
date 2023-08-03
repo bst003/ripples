@@ -13,9 +13,9 @@ const AddPostModal = (props) => {
             className="ripples-modal add-post-modal"
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
-            contentLabel="Game Alert Modal"
+            contentLabel="Add Post Modal"
         >
-            <button className="gameModal__close" type="button" onClick={closeModal}>
+            <button className="ripples-modal__close" type="button" onClick={closeModal}>
                 <span className="screen-reader-text">close</span>
                 <i className="fas fa-times"></i>
             </button>

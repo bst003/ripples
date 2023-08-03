@@ -174,3 +174,32 @@ input{
     }
 
 }
+
+// Base Modals
+////////////////////////////////////////////////
+ 
+.ReactModal__Overlay {
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.7)!important;
+    padding: 20px;
+}
+
+.ripples-modal{
+    position: relative;
+    border-radius: var(--siteBorderRadius);
+    background-color: var(--brandOffWhite);
+    border: 1px solid var(--siteBorderColor);
+    max-width: 560px;
+    width: 100%;
+    padding: 30px; 
+
+    &__close{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+}
