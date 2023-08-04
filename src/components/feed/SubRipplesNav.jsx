@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 
 import { Link } from "react-router-dom";
 
 import LoadingIcon from "../misc/LoadingIcon";
 
-import { getForums } from "../../firebase/forum";
+import SubRipplesContext from "./SubRipplesContext";
 
 import "./SubRipplesNav.scss";
 
 const SubRipplesNav = () => {
-    const [subRipples, setSubRipples] = useState([]);
+    // const [subRipples, setSubRipples] = useState([]);
 
-    useEffect(() => {
-        getForums(setSubRipples);
-    }, []);
+    // useEffect(() => {
+    //     getForums(setSubRipples);
+    // }, []);
+    const subRipples = useContext(SubRipplesContext);
 
     const toggleSubRipples = (e) => {
         e.preventDefault();
