@@ -1,9 +1,17 @@
 import { useContext } from "react";
 
+import PropTypes from "prop-types";
+
 import SubRipplesContext from "../SubRipplesContext";
 
-const AddPostForm = () => {
+import UserContext from "../../universal/UserContext";
+
+const AddPostForm = (props) => {
+    const { closeModal } = props;
+
     const subRipples = useContext(SubRipplesContext);
+
+    const userData = useContext(UserContext);
 
     const populateSubRipplesInput = () => {
         const subRipplesArr = [];
@@ -18,7 +26,7 @@ const AddPostForm = () => {
         if (subRipples) {
             subRipples.map((subRipple) => {
                 const option = (
-                    <option key={subRipple.id} value={subRipple.slug}>
+                    <option key={subRipple.id} value={subRipple.id}>
                         {subRipple.label}
                     </option>
                 );
@@ -83,11 +91,20 @@ const AddPostForm = () => {
             console.log("show errors");
             return;
         }
+        const postObj = {
+            title: title.value,
+            forumId: subRipple.value,
+            userGoogleId: userData.googleId,
+            content: content.value,
+        };
+
+        console.log(postObj);
 
         console.log("submit form and get response");
         console.log("clear fields");
         clearFormMessages(form);
         console.log("close modal");
+        closeModal();
     };
 
     return (
@@ -124,6 +141,10 @@ const AddPostForm = () => {
             <span className="form-error-msg"></span>
         </form>
     );
+};
+
+AddPostForm.propTypes = {
+    closeModal: PropTypes.func.isRequired,
 };
 
 export default AddPostForm;

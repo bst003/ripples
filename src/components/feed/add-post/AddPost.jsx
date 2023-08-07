@@ -19,7 +19,7 @@ const AddPost = () => {
                 </button>
             </div>
             <AddPostModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
-                <AddPostForm />
+                <AddPostForm closeModal={closeModal} />
             </AddPostModal>
         </>
     );

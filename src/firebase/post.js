@@ -1,4 +1,13 @@
-import { collection, getFirestore, getDocs, limit, where, query } from "firebase/firestore/lite";
+import {
+    addDoc,
+    serverTimestamp,
+    collection,
+    getFirestore,
+    getDocs,
+    limit,
+    where,
+    query,
+} from "firebase/firestore/lite";
 
 const getPosts = async (
     setPostState,
@@ -58,4 +67,18 @@ const getPosts = async (
     }
 };
 
-export { getPosts };
+const submitPost = async (postObj) => {
+    console.log("test");
+    try {
+        await addDoc(collection(getFirestore(), "posts"), {
+            ...postObj,
+            timestamp: serverTimestamp(),
+        });
+
+        // setSubmitted(true);
+    } catch (error) {
+        console.error("Error saving post to Firebase Database", error);
+    }
+};
+
+export { getPosts, submitPost };
