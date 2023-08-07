@@ -31,25 +31,39 @@ const AddPostForm = () => {
         return subRipplesArr;
     };
 
-    const formFieldsValid = (subRippleVal, titleVal, contentVal) => {
+    const formFieldsValid = (subRipple, title, content) => {
         let valid = true;
 
-        if (subRippleVal == "null") {
+        if (subRipple.value == "null") {
             valid = false;
+            subRipple.nextSibling.innerText = "Please select a value";
             console.log("display select error");
         }
 
-        if (!titleVal) {
+        if (!title.value) {
             valid = false;
+            title.nextSibling.innerText = "Please enter a post title";
             console.log("display title error");
         }
 
-        if (!contentVal) {
-            valid = false;
-            console.log("display content error");
-        }
+        console.log(content);
+        // if (!content.value) {
+        //     valid = false;
+        //     console.log("display content error");
+        // }
 
         return valid;
+    };
+
+    const clearFormMessages = (form) => {
+        const fieldErrors = form.querySelectorAll(".error-msg");
+        const formError = form.querySelector(".form-error-msg");
+
+        fieldErrors.forEach((fieldError) => {
+            fieldError.innerText = "";
+        });
+
+        formError.innerText = "";
     };
 
     const submitPost = (e) => {
@@ -61,17 +75,18 @@ const AddPostForm = () => {
         const title = form.querySelector("#post-title");
         const content = form.querySelector("#post-content");
 
-        const subRippleVal = subRipple.value;
-        const titleVal = title.value;
-        const contentVal = content.val;
+        // const subRippleVal = subRipple.value;
+        // const titleVal = title.value;
+        // const contentVal = content.value;
 
-        if (!formFieldsValid(subRippleVal, titleVal, contentVal)) {
+        if (!formFieldsValid(subRipple, title, content)) {
             console.log("show errors");
             return;
         }
 
         console.log("submit form and get response");
         console.log("clear fields");
+        clearFormMessages(form);
         console.log("close modal");
     };
 
@@ -84,6 +99,7 @@ const AddPostForm = () => {
                 <select id="sub-ripple" name="sub-ripple" required>
                     {populateSubRipplesInput()}
                 </select>
+                <span className="error-msg"></span>
             </div>
 
             <div className="form-field">
@@ -91,6 +107,7 @@ const AddPostForm = () => {
                     Post Title <span className="required">(Required)</span>
                 </label>
                 <input id="post-title" name="post-title" type="text" required />
+                <span className="error-msg"></span>
             </div>
 
             <div className="form-field">
@@ -104,7 +121,7 @@ const AddPostForm = () => {
                 </button>
             </div>
 
-            <span className="form-error"></span>
+            <span className="form-error-msg"></span>
         </form>
     );
 };
