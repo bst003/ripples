@@ -8,7 +8,6 @@ import UserContext from "./components/universal/UserContext.jsx";
 
 import Home from "./views/Home.jsx";
 import SubRipple from "./views/SubRipple.jsx";
-import Account from "./views/Account.jsx";
 import Profile from "./views/Profile.jsx";
 import NotFound from "./views/NotFound.jsx";
 
@@ -27,7 +26,6 @@ const RouteSwitch = () => {
                         <Route element={<MainLayout />}>
                             <Route path="/" element={<Home />} />
                             <Route path="/r/:slug" element={<SubRipple />} />
-                            <Route path="/account" element={<Account />} />
                             <Route path="/profile" element={<Profile />} />
                             <Route path="*" element={<NotFound />} />
                         </Route>

@@ -140,7 +140,7 @@ const AddPostForm = (props) => {
 
             <div className="form-field">
                 <label htmlFor="post-content">Post Content</label>
-                <textarea id="post-content" name="post-content"></textarea>
+                <textarea id="post-content" name="post-content" maxLength="500"></textarea>
             </div>
 
             <div className="form-field form-footer">
