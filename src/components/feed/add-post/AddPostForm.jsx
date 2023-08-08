@@ -6,6 +6,8 @@ import SubRipplesContext from "../SubRipplesContext";
 
 import UserContext from "../../universal/UserContext";
 
+import { submitPost } from "../../../firebase/post";
+
 const AddPostForm = (props) => {
     const { closeModal } = props;
 
@@ -74,7 +76,7 @@ const AddPostForm = (props) => {
         formError.innerText = "";
     };
 
-    const submitPost = (e) => {
+    const submitPostForm = async (e) => {
         e.preventDefault();
         console.log(e);
         const form = e.target;
@@ -101,14 +103,23 @@ const AddPostForm = (props) => {
         console.log(postObj);
 
         console.log("submit form and get response");
-        console.log("clear fields");
-        clearFormMessages(form);
-        console.log("close modal");
-        closeModal();
+        const postSubmitted = await submitPost(postObj);
+        if (postSubmitted) {
+            console.log("clear fields");
+            clearFormMessages(form);
+            console.log("close modal");
+            closeModal();
+        } else {
+            console.log("show form alert");
+            const formError = form.querySelector(".form-error-msg");
+
+            formError.innerText =
+                "There was an issue submitting the form, please try again in a few minutes";
+        }
     };
 
     return (
-        <form className="add-post-form" onSubmit={submitPost}>
+        <form className="add-post-form" onSubmit={submitPostForm}>
             <div className="form-field">
                 <label htmlFor="sub-ripple">
                     What Sub Ripple are you posting to? <span className="required">(Required)</span>

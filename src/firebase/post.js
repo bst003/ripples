@@ -76,8 +76,11 @@ const submitPost = async (postObj) => {
         });
 
         // setSubmitted(true);
+        return true;
     } catch (error) {
         console.error("Error saving post to Firebase Database", error);
+
+        return false;
     }
 };
 
