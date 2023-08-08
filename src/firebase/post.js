@@ -70,13 +70,15 @@ const getPosts = async (
 const submitPost = async (postObj) => {
     console.log("test");
     try {
-        await addDoc(collection(getFirestore(), "posts"), {
+        const newPost = await addDoc(collection(getFirestore(), "posts"), {
             ...postObj,
             timestamp: serverTimestamp(),
         });
 
+        console.log(newPost.id);
+
         // setSubmitted(true);
-        return true;
+        return newPost.id;
     } catch (error) {
         console.error("Error saving post to Firebase Database", error);
 

@@ -49,9 +49,6 @@ const AccountNav = () => {
                                 <Link to="/profile">Profile</Link>
                             </li>
                             <li>
-                                <Link to="/account">Account</Link>
-                            </li>
-                            <li>
                                 <button type="button" onClick={signOutUser}>
                                     Sign Out
                                 </button>
