@@ -9,6 +9,32 @@ import {
     query,
 } from "firebase/firestore/lite";
 
+const getPost = async (setPostState, postId = null) => {
+    try {
+        let postQuery = query(collection(getFirestore(), "posts"), where("__name__", "==", postId));
+
+        const postQuerySnapshot = await getDocs(postQuery);
+
+        const postObj = {};
+        postQuerySnapshot.forEach((doc) => {
+            console.log(doc.data());
+
+            postObj.id = doc.id;
+            postObj.title = doc.data().title;
+            postObj.content = doc.data().content;
+            postObj.userGoogleId = doc.data().userGoogleId;
+            postObj.forumId = doc.data().forumId;
+            postObj.timestamp = doc.data().timestamp.toMillis();
+        });
+
+        console.log(postObj);
+
+        setPostState(postObj);
+    } catch (error) {
+        console.log("Error fetching post: " + error);
+    }
+};
+
 const getPosts = async (
     setPostState,
     userGoogleId = null,
@@ -86,4 +112,4 @@ const submitPost = async (postObj) => {
     }
 };
 
-export { getPosts, submitPost };
+export { getPost, getPosts, submitPost };

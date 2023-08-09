@@ -15,7 +15,7 @@ const SubRipple = () => {
     const [forum, setForum] = useState(null);
 
     useEffect(() => {
-        setIsLoading(false);
+        setIsLoading(true);
 
         const getForumUpdateLoad = async () => {
             await getForum(setForum, null, slug);
