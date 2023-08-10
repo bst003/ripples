@@ -45,7 +45,7 @@ const SinglePost = () => {
         }
     };
 
-    return <section className="posts-feed">{singlePostContent()}</section>;
+    return <section className="posts-feed no-border no-margin">{singlePostContent()}</section>;
 };
 
 export default SinglePost;

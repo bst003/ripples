@@ -59,6 +59,11 @@ body{
     flex: 1 1;
     padding: 0px var(--siteHorizonalPadding);
 
+    &.padded{ 
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
     &__inner{
         margin: 0 auto;
         max-width: var(--siteContentWidth);

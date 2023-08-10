@@ -2,4 +2,12 @@
     margin: 20px auto 40px;
     padding-top: 20px;
     border-top: 1px solid var(--brandDarkGray);
+
+    &.no-border{
+        border-top: initial;
+    }
+
+    &.no-margin{
+        margin: 0px;
+    }
 }
