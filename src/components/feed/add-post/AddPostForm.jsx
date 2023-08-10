@@ -1,5 +1,7 @@
 import { useContext } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import PropTypes from "prop-types";
 
 import SubRipplesContext from "../SubRipplesContext";
@@ -10,6 +12,8 @@ import { submitPost } from "../../../firebase/post";
 
 const AddPostForm = (props) => {
     const { closeModal } = props;
+
+    const navigate = useNavigate();
 
     const subRipples = useContext(SubRipplesContext);
 
@@ -103,12 +107,13 @@ const AddPostForm = (props) => {
         console.log(postObj);
 
         console.log("submit form and get response");
-        const postSubmitted = await submitPost(postObj);
-        if (postSubmitted) {
+        const postSubmittedId = await submitPost(postObj);
+        if (postSubmittedId) {
             console.log("clear fields");
             clearFormMessages(form);
             console.log("close modal");
             closeModal();
+            navigate("/post/" + postSubmittedId);
         } else {
             console.log("show form alert");
             const formError = form.querySelector(".form-error-msg");
