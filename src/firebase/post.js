@@ -5,6 +5,7 @@ import {
     getFirestore,
     getDocs,
     limit,
+    orderBy,
     where,
     query,
 } from "firebase/firestore/lite";
@@ -43,14 +44,19 @@ const getPosts = async (
     count = 10
 ) => {
     try {
-        let postsQuery = query(collection(getFirestore(), "posts"), limit(count));
+        let postsQuery = query(
+            collection(getFirestore(), "posts"),
+            limit(count),
+            orderBy("timestamp", "desc")
+        );
 
         if (userGoogleId) {
             // console.log(userGoogleId);
             postsQuery = query(
                 collection(getFirestore(), "posts"),
                 where("userGoogleId", "==", userGoogleId),
-                limit(count)
+                limit(count),
+                orderBy("timestamp", "desc")
             );
         }
 
@@ -61,7 +67,8 @@ const getPosts = async (
             postsQuery = query(
                 collection(getFirestore(), "posts"),
                 where("forumId", "==", subRippleId),
-                limit(count)
+                limit(count),
+                orderBy("timestamp", "desc")
             );
         }
 
