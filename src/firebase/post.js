@@ -76,7 +76,11 @@ const getPosts = async (
             console.log(offset);
         }
 
+        console.log(postsQuery);
+
         const postsQuerySnapshot = await getDocs(postsQuery);
+
+        console.log(postsQuerySnapshot._docs);
 
         const postsArray = [];
         postsQuerySnapshot.forEach((doc) => {

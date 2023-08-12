@@ -1,0 +1,15 @@
+.pc__controls{
+    background-color: var(--brandOffWhite);
+    border-radius: 0px 0px var(--siteBorderRadius) var(--siteBorderRadius);
+    display: flex;
+    overflow: hidden;
+
+    .control-button{
+        padding: 8px;
+        flex: 1;
+        border: initial;
+        background-color: initial;
+        text-align: center;
+    }
+
+}

@@ -6,6 +6,8 @@ import PostBody from "./PostBody.jsx";
 
 import PostCommentsFeed from "./PostCommentsFeed.jsx";
 
+import PostControls from "./PostControls.jsx";
+
 import PostSubRipple from "./PostSubRipple.jsx";
 
 import "./PostCard.scss";
@@ -25,6 +27,8 @@ const PostCard = (props) => {
                 </div>
 
                 <PostBody content={content} />
+
+                <PostControls id={id} userGoogleId={userGoogleId} />
             </div>
             <div className="pc__comments">
                 <PostCommentsFeed postId={id} />

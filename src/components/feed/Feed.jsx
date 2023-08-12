@@ -8,14 +8,17 @@ import PostCard from "./post-card/PostCard.jsx";
 
 import LoadingIcon from "../misc/LoadingIcon.jsx";
 
+import LoadMore from "./LoadMore.jsx";
+
 import "./Feed.scss";
 
 /*
 
-Parts of Feed
-    Sort
-    Posts
-    Load More Btn
+How to offset posts?
+    https://firebase.google.com/docs/firestore/query-data/query-cursors
+
+REFACTOR getData methods to take OBJ as argument? 
+
 */
 
 const Feed = (props) => {
@@ -24,6 +27,8 @@ const Feed = (props) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [posts, setPosts] = useState([]);
+
+    // const [postsCount, setPostsCount] = useState(10);
 
     useEffect(() => {
         setIsLoading(true);
@@ -69,7 +74,12 @@ const Feed = (props) => {
         }
     };
 
-    return <section className="posts-feed">{feedContent()}</section>;
+    return (
+        <section className="posts-feed">
+            {feedContent()}
+            <LoadMore />
+        </section>
+    );
 };
 
 Feed.propTypes = {
