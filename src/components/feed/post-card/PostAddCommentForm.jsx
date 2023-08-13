@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+import { serverTimestamp } from "firebase/firestore/lite";
+
 import { submitComment } from "../../../firebase/comment";
 /*
 
@@ -11,7 +13,7 @@ Need to pass following properties
 */
 
 const PostAddCommentForm = (props) => {
-    const { id, userGoogleId, toggleCommentForm } = props;
+    const { id, userGoogleId, toggleCommentForm, passHandleNewComment } = props;
 
     const clearFormMessages = (form) => {
         const formError = form.querySelector(".form-error-msg");
@@ -34,7 +36,11 @@ const PostAddCommentForm = (props) => {
         if (submittedCommentId) {
             console.log("success");
             toggleCommentForm();
-            clearFormMessages();
+            clearFormMessages(form);
+
+            commentObj.timestamp = serverTimestamp();
+
+            passHandleNewComment(commentObj);
         } else {
             console.log("error");
             const formError = form.querySelector(".form-error-msg");
@@ -65,6 +71,7 @@ PostAddCommentForm.propTypes = {
     id: PropTypes.string,
     userGoogleId: PropTypes.string,
     toggleCommentForm: PropTypes.func,
+    passHandleNewComment: PropTypes.func,
 };
 
 export default PostAddCommentForm;

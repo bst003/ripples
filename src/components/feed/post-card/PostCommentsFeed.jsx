@@ -22,7 +22,7 @@ Fields needed
 */
 
 const PostCommentsFeed = (props) => {
-    const { postId } = props;
+    const { postId, newComments } = props;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -37,6 +37,18 @@ const PostCommentsFeed = (props) => {
 
         getCommentsUpdateLoad();
     }, [postId]);
+
+    const appendNewComments = () => {
+        if (newComments.length > 0) {
+            const newCommentItems = newComments.map((comment, index) => {
+                return <li key={index}>{comment.content}</li>;
+            });
+
+            const newCommentItemsRev = newCommentItems.reverse();
+
+            return newCommentItemsRev;
+        }
+    };
 
     const PostCommentsFeedContent = () => {
         if (isLoading) {
@@ -54,11 +66,17 @@ const PostCommentsFeed = (props) => {
         }
     };
 
-    return <div className="pc__comments-feed">{PostCommentsFeedContent()}</div>;
+    return (
+        <div className="pc__comments-feed">
+            {appendNewComments()}
+            {PostCommentsFeedContent()}
+        </div>
+    );
 };
 
 PostCommentsFeed.propTypes = {
     postId: PropTypes.string,
+    newComments: PropTypes.array,
 };
 
 export default PostCommentsFeed;

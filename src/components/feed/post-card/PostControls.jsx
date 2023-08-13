@@ -24,7 +24,7 @@ Compare to user context
 */
 
 const PostControls = (props) => {
-    const { id, userGoogleId } = props;
+    const { id, userGoogleId, passHandleNewComment } = props;
 
     const userData = useContext(UserContext);
 
@@ -59,6 +59,12 @@ const PostControls = (props) => {
         }
     };
 
+    const handleNewComment = (commentObj) => {
+        console.log("Post Controls --------");
+        console.log(commentObj);
+        passHandleNewComment(commentObj);
+    };
+
     return (
         <>
             <div className="pc__controls">{controlContent()}</div>
@@ -67,6 +73,7 @@ const PostControls = (props) => {
                     id={id}
                     userGoogleId={userGoogleId}
                     toggleCommentForm={toggleForm}
+                    passHandleNewComment={handleNewComment}
                 />
             ) : (
                 ""
@@ -78,6 +85,7 @@ const PostControls = (props) => {
 PostControls.propTypes = {
     id: PropTypes.string,
     userGoogleId: PropTypes.string,
+    passHandleNewComment: PropTypes.func,
 };
 
 export default PostControls;

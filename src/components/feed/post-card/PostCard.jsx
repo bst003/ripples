@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import PropTypes from "prop-types";
 
 import PostHeader from "./PostHeader.jsx";
@@ -15,6 +17,12 @@ import "./PostCard.scss";
 const PostCard = (props) => {
     const { id, title, content, userGoogleId, forumId, timestamp } = props;
 
+    const [newComments, setNewComments] = useState([]);
+    const handleNewComment = (commentObj) => {
+        console.log("handling new comments");
+        setNewComments([...newComments, commentObj]);
+    };
+
     return (
         <div className="post-card pc">
             <div className="pc__post">
@@ -28,10 +36,14 @@ const PostCard = (props) => {
 
                 <PostBody content={content} />
 
-                <PostControls id={id} userGoogleId={userGoogleId} />
+                <PostControls
+                    id={id}
+                    userGoogleId={userGoogleId}
+                    passHandleNewComment={handleNewComment}
+                />
             </div>
             <div className="pc__comments">
-                <PostCommentsFeed postId={id} />
+                <PostCommentsFeed postId={id} newComments={newComments} />
             </div>
         </div>
     );
