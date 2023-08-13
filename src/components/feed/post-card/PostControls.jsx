@@ -4,6 +4,8 @@ import UserContext from "./../../universal/UserContext";
 
 import { Link } from "react-router-dom";
 
+import PostAddCommentForm from "./PostAddCommentForm";
+
 import PropTypes from "prop-types";
 
 import "./PostControls.scss";
@@ -60,7 +62,7 @@ const PostControls = (props) => {
     return (
         <>
             <div className="pc__controls">{controlContent()}</div>
-            {addComment ? "Add comment" : ""}
+            {addComment ? <PostAddCommentForm id={id} userGoogleId={userGoogleId} /> : ""}
         </>
     );
 };

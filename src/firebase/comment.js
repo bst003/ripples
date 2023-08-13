@@ -1,4 +1,12 @@
-import { collection, getFirestore, getDocs, where, query } from "firebase/firestore/lite";
+import {
+    collection,
+    getFirestore,
+    addDoc,
+    getDocs,
+    where,
+    query,
+    serverTimestamp,
+} from "firebase/firestore/lite";
 
 const getComments = async (setCommentState, userGoogleId = null, postId = null, offset = null) => {
     try {
@@ -50,4 +58,23 @@ const getComments = async (setCommentState, userGoogleId = null, postId = null, 
     }
 };
 
-export { getComments };
+const submitComment = async (commentObj) => {
+    console.log("test");
+    try {
+        const newComment = await addDoc(collection(getFirestore(), "comments"), {
+            ...commentObj,
+            timestamp: serverTimestamp(),
+        });
+
+        console.log(newComment.id);
+
+        // setSubmitted(true);
+        return newComment.id;
+    } catch (error) {
+        console.error("Error saving comment to Firebase Database", error);
+
+        return false;
+    }
+};
+
+export { getComments, submitComment };
