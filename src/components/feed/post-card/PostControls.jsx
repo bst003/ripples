@@ -1,8 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import UserContext from "./../../universal/UserContext";
 
 import { Link } from "react-router-dom";
+
+import PropTypes from "prop-types";
 
 import "./PostControls.scss";
 
@@ -24,6 +26,11 @@ const PostControls = (props) => {
 
     const userData = useContext(UserContext);
 
+    const [addComment, setAddComment] = useState(false);
+    const toggleForm = () => {
+        setAddComment(!addComment);
+    };
+
     const deleteButtonContent = () => {
         if (userData.googleId === userGoogleId) {
             return (
@@ -38,7 +45,7 @@ const PostControls = (props) => {
         if (userData) {
             return (
                 <>
-                    <button className="control-button" type="button">
+                    <button className="control-button" type="button" onClick={toggleForm}>
                         <i className="fa-solid fa-comment"></i>
                     </button>
                     <Link className="control-button" to={"/post/" + id}>
@@ -50,7 +57,17 @@ const PostControls = (props) => {
         }
     };
 
-    return <div className="pc__controls">{controlContent()}</div>;
+    return (
+        <>
+            <div className="pc__controls">{controlContent()}</div>
+            {addComment ? "Add comment" : ""}
+        </>
+    );
+};
+
+PostControls.propTypes = {
+    id: PropTypes.string,
+    userGoogleId: PropTypes.string,
 };
 
 export default PostControls;
