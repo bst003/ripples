@@ -62,7 +62,15 @@ const PostControls = (props) => {
     return (
         <>
             <div className="pc__controls">{controlContent()}</div>
-            {addComment ? <PostAddCommentForm id={id} userGoogleId={userGoogleId} /> : ""}
+            {addComment ? (
+                <PostAddCommentForm
+                    id={id}
+                    userGoogleId={userGoogleId}
+                    toggleCommentForm={toggleForm}
+                />
+            ) : (
+                ""
+            )}
         </>
     );
 };

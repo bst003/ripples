@@ -11,7 +11,12 @@ Need to pass following properties
 */
 
 const PostAddCommentForm = (props) => {
-    const { id, userGoogleId } = props;
+    const { id, userGoogleId, toggleCommentForm } = props;
+
+    const clearFormMessages = (form) => {
+        const formError = form.querySelector(".form-error-msg");
+        formError.innerText = "";
+    };
 
     const submitCommentForm = async (e) => {
         e.preventDefault();
@@ -28,8 +33,13 @@ const PostAddCommentForm = (props) => {
         const submittedCommentId = await submitComment(commentObj);
         if (submittedCommentId) {
             console.log("success");
+            toggleCommentForm();
+            clearFormMessages();
         } else {
             console.log("error");
+            const formError = form.querySelector(".form-error-msg");
+            formError.innerText =
+                "There was an error submitting your comment, please try again in a few minutes.";
         }
     };
 
@@ -54,6 +64,7 @@ const PostAddCommentForm = (props) => {
 PostAddCommentForm.propTypes = {
     id: PropTypes.string,
     userGoogleId: PropTypes.string,
+    toggleCommentForm: PropTypes.func,
 };
 
 export default PostAddCommentForm;
