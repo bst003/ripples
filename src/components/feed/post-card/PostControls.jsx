@@ -8,6 +8,8 @@ import PostAddCommentForm from "./PostAddCommentForm";
 
 import PropTypes from "prop-types";
 
+import { deletePost } from "../../../firebase/post";
+
 import "./PostControls.scss";
 
 /*
@@ -33,10 +35,15 @@ const PostControls = (props) => {
         setAddComment(!addComment);
     };
 
+    const triggerDeletePost = () => {
+        // add alert modal
+        deletePost(id);
+    };
+
     const deleteButtonContent = () => {
         if (userData.googleId === userGoogleId) {
             return (
-                <button className="control-button" type="button">
+                <button className="control-button" type="button" onClick={triggerDeletePost}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
             );

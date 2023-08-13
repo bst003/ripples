@@ -1,5 +1,6 @@
 import {
     addDoc,
+    deleteDoc,
     serverTimestamp,
     collection,
     getFirestore,
@@ -104,6 +105,12 @@ const getPosts = async (
     }
 };
 
+const deletePost = async (postId) => {
+    const deletedDoc = await deleteDoc(getFirestore(), "posts", postId);
+
+    // Need to delete all comments associated with post or do I?
+};
+
 const submitPost = async (postObj) => {
     console.log("test");
     try {
@@ -123,4 +130,4 @@ const submitPost = async (postObj) => {
     }
 };
 
-export { getPost, getPosts, submitPost };
+export { getPost, getPosts, deletePost, submitPost };

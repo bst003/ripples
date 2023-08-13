@@ -23,6 +23,11 @@ const PostCard = (props) => {
         setNewComments([...newComments, commentObj]);
     };
 
+    const [deleted, setDeleted] = useState(false);
+    const handleDeletePost = () => {
+        setDeleted(true);
+    };
+
     return (
         <div className="post-card pc">
             <div className="pc__post">
