@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+
+import { submitComment } from "../../../firebase/comment";
 /*
 
 Need to pass following properties
@@ -11,9 +13,24 @@ Need to pass following properties
 const PostAddCommentForm = (props) => {
     const { id, userGoogleId } = props;
 
-    const submitCommentForm = () => {
-        console.log(id);
-        console.log(userGoogleId);
+    const submitCommentForm = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+
+        const content = form.querySelector("#post-comment");
+
+        const commentObj = {
+            postId: id,
+            userGoogleId: userGoogleId,
+            content: content.value,
+        };
+
+        const submittedCommentId = await submitComment(commentObj);
+        if (submittedCommentId) {
+            console.log("success");
+        } else {
+            console.log("error");
+        }
     };
 
     return (
