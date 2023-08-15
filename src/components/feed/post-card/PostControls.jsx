@@ -4,11 +4,13 @@ import UserContext from "./../../universal/UserContext";
 
 import { Link } from "react-router-dom";
 
-import PostAddCommentForm from "./PostAddCommentForm";
-
 import PropTypes from "prop-types";
 
 import { deletePost } from "../../../firebase/post";
+
+import PostAddCommentForm from "./PostAddCommentForm";
+
+import PostDeleteModal from "./PostDeleteModal";
 
 import "./PostControls.scss";
 
