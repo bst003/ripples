@@ -24,7 +24,7 @@ const PostDeleteModal = (props) => {
     );
 };
 
-AddPostModal.propTypes = {
+PostDeleteModal.propTypes = {
     modalIsOpen: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
     children: PropTypes.element,

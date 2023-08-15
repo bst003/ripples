@@ -19,6 +19,8 @@ Fields needed
 - Add way to differentiate between no comments founds and loading
 - Move any conditional rendering out of return and into method (NOT FOR HERE, BUT EVERYWHERE)
 
+APPLY LOGIC TO REMOVE NO POSTS FOUND TEXT WHEN NEW COMMENT IS ADDED
+
 */
 
 const PostCommentsFeed = (props) => {
