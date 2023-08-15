@@ -37,7 +37,9 @@ const PostControls = (props) => {
 
     const triggerDeletePost = () => {
         // add alert modal
-        deletePost(id);
+        if (confirm("delete post")) {
+            deletePost(id);
+        }
     };
 
     const deleteButtonContent = () => {
@@ -62,6 +64,12 @@ const PostControls = (props) => {
                     </Link>
                     {deleteButtonContent()}
                 </>
+            );
+        } else {
+            return (
+                <Link className="control-button" to={"/post/" + id}>
+                    <i className="fa-solid fa-expand"></i>
+                </Link>
             );
         }
     };

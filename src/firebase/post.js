@@ -3,6 +3,7 @@ import {
     deleteDoc,
     serverTimestamp,
     collection,
+    doc,
     getFirestore,
     getDocs,
     limit,
@@ -106,7 +107,15 @@ const getPosts = async (
 };
 
 const deletePost = async (postId) => {
-    const deletedDoc = await deleteDoc(getFirestore(), "posts", postId);
+    console.log(postId);
+    try {
+        const deletedDoc = await deleteDoc(doc(getFirestore(), "posts", postId));
+        console.log(deletedDoc);
+        return true;
+    } catch (error) {
+        console.log("Error deleting post: " + error);
+        return false;
+    }
 
     // Need to delete all comments associated with post or do I?
 };
