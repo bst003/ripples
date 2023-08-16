@@ -30,18 +30,35 @@ const PostControls = (props) => {
 
     const userData = useContext(UserContext);
 
+    /*
+    The below methods are related to toggling the new comment form 
+    and controlling passing new comment data back to PostCard
+    */
     const [addComment, setAddComment] = useState(false);
     const toggleForm = () => {
         setAddComment(!addComment);
     };
 
-    // const triggerDeletePost = () => {
-    //     // add alert modal
-    //     if (confirm("delete post")) {
-    //         deletePost(id);
-    //     }
-    // };
+    const handleNewComment = (commentObj) => {
+        passHandleNewComment(commentObj);
+    };
 
+    const addCommentContent = () => {
+        if (addComment) {
+            <PostAddCommentForm
+                id={postId}
+                userGoogleId={userGoogleId}
+                toggleCommentForm={toggleForm}
+                passHandleNewComment={handleNewComment}
+            />;
+        }
+    };
+
+    /*
+    The below methods are used to toggle the post delete modal,
+    controlling the delete button content and passing deleted 
+    post methods back to PostCard
+    */
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const closeModal = () => {
@@ -74,6 +91,10 @@ const PostControls = (props) => {
         }
     };
 
+    /*
+    The below method is used to control which controls appear based
+    on user login status
+    */
     const controlContent = () => {
         if (userData) {
             return (
@@ -96,25 +117,10 @@ const PostControls = (props) => {
         }
     };
 
-    const handleNewComment = (commentObj) => {
-        console.log("Post Controls --------");
-        console.log(commentObj);
-        passHandleNewComment(commentObj);
-    };
-
     return (
         <>
             <div className="pc__controls">{controlContent()}</div>
-            {addComment ? (
-                <PostAddCommentForm
-                    id={postId}
-                    userGoogleId={userGoogleId}
-                    toggleCommentForm={toggleForm}
-                    passHandleNewComment={handleNewComment}
-                />
-            ) : (
-                ""
-            )}
+            {addCommentContent()}
         </>
     );
 };
