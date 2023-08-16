@@ -52,28 +52,46 @@ const PostCommentsFeed = (props) => {
         }
     };
 
+    const loadedCommentsContent = () => {
+        if (comments.length > 0) {
+            const commentItems = comments.map((comment) => {
+                return <li key={comment.id}>{comment.content}</li>;
+            });
+
+            return commentItems;
+        }
+    };
+
+    const noCommentsContent = () => {
+        if (!comments.length && !newComments.length) {
+            return <p>No comments found</p>;
+        }
+    };
+
     const PostCommentsFeedContent = () => {
         if (isLoading) {
             return <LoadingIcon />;
         } else {
-            if (comments.length > 0) {
-                const commentItems = comments.map((comment) => {
-                    return <li key={comment.id}>{comment.content}</li>;
-                });
+            return (
+                <>
+                    {appendNewComments()}
+                    {loadedCommentsContent()}
+                    {noCommentsContent()}
+                </>
+            );
+            // if (comments.length > 0) {
+            //     const commentItems = comments.map((comment) => {
+            //         return <li key={comment.id}>{comment.content}</li>;
+            //     });
 
-                return commentItems;
-            } else {
-                return <>No comments found</>;
-            }
+            //     return commentItems;
+            // } else {
+            //     return <>No comments found</>;
+            // }
         }
     };
 
-    return (
-        <div className="pc__comments-feed">
-            {appendNewComments()}
-            {PostCommentsFeedContent()}
-        </div>
-    );
+    return <div className="pc__comments-feed">{PostCommentsFeedContent()}</div>;
 };
 
 PostCommentsFeed.propTypes = {
