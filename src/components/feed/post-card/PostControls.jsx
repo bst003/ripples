@@ -45,12 +45,14 @@ const PostControls = (props) => {
 
     const addCommentContent = () => {
         if (addComment) {
-            <PostAddCommentForm
-                id={postId}
-                userGoogleId={userGoogleId}
-                toggleCommentForm={toggleForm}
-                passHandleNewComment={handleNewComment}
-            />;
+            return (
+                <PostAddCommentForm
+                    id={postId}
+                    userGoogleId={userGoogleId}
+                    toggleCommentForm={toggleForm}
+                    passHandleNewComment={handleNewComment}
+                />
+            );
         }
     };
 
