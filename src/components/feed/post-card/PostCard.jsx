@@ -23,34 +23,41 @@ const PostCard = (props) => {
         setNewComments([...newComments, commentObj]);
     };
 
-    const [deleted, setDeleted] = useState(false);
+    const [isDeleted, setisDeleted] = useState(false);
     const handleDeletePost = () => {
-        setDeleted(true);
+        setisDeleted(true);
     };
 
     return (
-        <div className="post-card pc">
-            <div className="pc__post">
-                <PostHeader userGoogleId={userGoogleId} timestamp={timestamp} />
+        <>
+            {isDeleted ? (
+                <></>
+            ) : (
+                <div className="post-card pc">
+                    <div className="pc__post">
+                        <PostHeader userGoogleId={userGoogleId} timestamp={timestamp} />
 
-                <PostSubRipple forumId={forumId} />
+                        <PostSubRipple forumId={forumId} />
 
-                <div className="pc__title">
-                    <h2>{title}</h2>
+                        <div className="pc__title">
+                            <h2>{title}</h2>
+                        </div>
+
+                        <PostBody content={content} />
+
+                        <PostControls
+                            postId={id}
+                            userGoogleId={userGoogleId}
+                            passHandleNewComment={handleNewComment}
+                            passHandleDeletePost={handleDeletePost}
+                        />
+                    </div>
+                    <div className="pc__comments">
+                        <PostCommentsFeed postId={id} newComments={newComments} />
+                    </div>
                 </div>
-
-                <PostBody content={content} />
-
-                <PostControls
-                    id={id}
-                    userGoogleId={userGoogleId}
-                    passHandleNewComment={handleNewComment}
-                />
-            </div>
-            <div className="pc__comments">
-                <PostCommentsFeed postId={id} newComments={newComments} />
-            </div>
-        </div>
+            )}
+        </>
     );
 };
 

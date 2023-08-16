@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 
-import { deletePost } from "../../../firebase/post";
-
 import PostAddCommentForm from "./PostAddCommentForm";
 
 import PostDeleteModal from "./PostDeleteModal";
@@ -28,7 +26,7 @@ Compare to user context
 */
 
 const PostControls = (props) => {
-    const { id, userGoogleId, passHandleNewComment } = props;
+    const { postId, userGoogleId, passHandleNewComment, passHandleDeletePost } = props;
 
     const userData = useContext(UserContext);
 
@@ -37,19 +35,41 @@ const PostControls = (props) => {
         setAddComment(!addComment);
     };
 
-    const triggerDeletePost = () => {
-        // add alert modal
-        if (confirm("delete post")) {
-            deletePost(id);
-        }
+    // const triggerDeletePost = () => {
+    //     // add alert modal
+    //     if (confirm("delete post")) {
+    //         deletePost(id);
+    //     }
+    // };
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
+    const handleDeletePost = () => {
+        passHandleDeletePost();
     };
 
     const deleteButtonContent = () => {
         if (userData.googleId === userGoogleId) {
             return (
-                <button className="control-button" type="button" onClick={triggerDeletePost}>
-                    <i className="fa-solid fa-trash"></i>
-                </button>
+                <>
+                    <button
+                        className="control-button"
+                        type="button"
+                        onClick={() => setModalIsOpen(true)}
+                    >
+                        <i className="fa-solid fa-trash"></i>
+                    </button>
+                    <PostDeleteModal
+                        postId={postId}
+                        modalIsOpen={modalIsOpen}
+                        closeModal={closeModal}
+                        passHandleDeletePost={handleDeletePost}
+                    />
+                </>
             );
         }
     };
@@ -61,7 +81,7 @@ const PostControls = (props) => {
                     <button className="control-button" type="button" onClick={toggleForm}>
                         <i className="fa-solid fa-comment"></i>
                     </button>
-                    <Link className="control-button" to={"/post/" + id}>
+                    <Link className="control-button" to={"/post/" + postId}>
                         <i className="fa-solid fa-expand"></i>
                     </Link>
                     {deleteButtonContent()}
@@ -69,7 +89,7 @@ const PostControls = (props) => {
             );
         } else {
             return (
-                <Link className="control-button" to={"/post/" + id}>
+                <Link className="control-button" to={"/post/" + postId}>
                     <i className="fa-solid fa-expand"></i>
                 </Link>
             );
@@ -87,7 +107,7 @@ const PostControls = (props) => {
             <div className="pc__controls">{controlContent()}</div>
             {addComment ? (
                 <PostAddCommentForm
-                    id={id}
+                    id={postId}
                     userGoogleId={userGoogleId}
                     toggleCommentForm={toggleForm}
                     passHandleNewComment={handleNewComment}
@@ -100,9 +120,10 @@ const PostControls = (props) => {
 };
 
 PostControls.propTypes = {
-    id: PropTypes.string,
+    postId: PropTypes.string,
     userGoogleId: PropTypes.string,
     passHandleNewComment: PropTypes.func,
+    passHandleDeletePost: PropTypes.func,
 };
 
 export default PostControls;

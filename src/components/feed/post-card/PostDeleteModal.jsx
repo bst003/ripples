@@ -2,10 +2,21 @@ import Modal from "react-modal";
 
 import PropTypes from "prop-types";
 
+import { deletePost } from "../../../firebase/post";
+
 const PostDeleteModal = (props) => {
-    const { modalIsOpen, closeModal, children } = props;
+    const { postId, modalIsOpen, closeModal, passHandleDeletePost } = props;
 
     Modal.setAppElement("#root");
+
+    const triggerDeletePost = async () => {
+        const postDeleted = await deletePost(postId);
+        if (postDeleted) {
+            console.log("the post has been deleted, remove from content");
+            passHandleDeletePost();
+            closeModal();
+        }
+    };
 
     return (
         <Modal
@@ -19,15 +30,19 @@ const PostDeleteModal = (props) => {
                 <span className="screen-reader-text">close</span>
                 <i className="fas fa-times"></i>
             </button>
-            {children}
+            <p>Are you sure you want to delete this post?</p>
+            <button className="btn-el" onClick={triggerDeletePost}>
+                yes
+            </button>
         </Modal>
     );
 };
 
 PostDeleteModal.propTypes = {
+    postId: PropTypes.string.isRequired,
     modalIsOpen: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
-    children: PropTypes.element,
+    passHandleDeletePost: PropTypes.func.isRequired,
 };
 
 export default PostDeleteModal;

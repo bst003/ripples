@@ -7,7 +7,6 @@ const AddPost = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const closeModal = () => {
-        console.log("close");
         setModalIsOpen(false);
     };
 
