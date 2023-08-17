@@ -38,44 +38,114 @@ const getPost = async (setPostState, postId = null) => {
     }
 };
 
-const getPosts = async (
-    setPostState,
-    userGoogleId = null,
-    subRippleId = null,
-    offset = null,
-    count = 10
-) => {
+// const getPosts = async (
+//     setPostState,
+//     userGoogleId = null,
+//     subRippleId = null,
+//     offset = null,
+//     count = 10
+// ) => {
+//     let trueCount = count + Number(1);
+//     console.log(`count is ${trueCount}`);
+//     try {
+//         let postsQuery = query(
+//             collection(getFirestore(), "posts"),
+//             limit(trueCount),
+//             orderBy("timestamp", "desc")
+//         );
+
+//         if (userGoogleId) {
+//             // console.log(userGoogleId);
+//             postsQuery = query(
+//                 collection(getFirestore(), "posts"),
+//                 where("userGoogleId", "==", userGoogleId),
+//                 limit(trueCount),
+//                 orderBy("timestamp", "desc")
+//             );
+//         }
+
+//         if (subRippleId) {
+//             console.log("we have a sub rippkle id");
+//             postsQuery = query(
+//                 collection(getFirestore(), "posts"),
+//                 where("forumId", "==", subRippleId),
+//                 limit(trueCount),
+//                 orderBy("timestamp", "desc")
+//             );
+//         }
+
+//         if (offset) {
+//             let trueOffset = offset + Number(1);
+//             // console.log()
+//         }
+
+//         console.log(postsQuery);
+
+//         const postsQuerySnapshot = await getDocs(postsQuery);
+
+//         console.log(postsQuerySnapshot._docs);
+
+//         const postsArray = [];
+//         postsQuerySnapshot.forEach((doc) => {
+//             const postObj = {
+//                 id: doc.id,
+//                 title: doc.data().title,
+//                 content: doc.data().content,
+//                 userGoogleId: doc.data().userGoogleId,
+//                 forumId: doc.data().forumId,
+//                 timestamp: doc.data().timestamp.toMillis(),
+//             };
+
+//             console.log(postObj);
+
+//             postsArray.push(postObj);
+//         });
+
+//         if (postsArray.length === trueCount) {
+//             console.log("overlow, show load more");
+//         }
+
+//         console.log(postsArray);
+
+//         setPostState(postsArray);
+//     } catch (error) {
+//         console.log("Error fetching posts: " + error);
+//     }
+// };
+
+const getPosts = async (params) => {
+    let trueCount = params.count + Number(1);
+    console.log(`count is ${trueCount}`);
     try {
         let postsQuery = query(
             collection(getFirestore(), "posts"),
-            limit(count),
+            limit(trueCount),
             orderBy("timestamp", "desc")
         );
 
-        if (userGoogleId) {
+        if (params.userGoogleId) {
             // console.log(userGoogleId);
             postsQuery = query(
                 collection(getFirestore(), "posts"),
-                where("userGoogleId", "==", userGoogleId),
-                limit(count),
+                where("userGoogleId", "==", params.userGoogleId),
+                limit(trueCount),
                 orderBy("timestamp", "desc")
             );
         }
 
-        console.log("this is  atest");
-
-        if (subRippleId) {
+        if (params.subRippleId) {
             console.log("we have a sub rippkle id");
             postsQuery = query(
                 collection(getFirestore(), "posts"),
-                where("forumId", "==", subRippleId),
-                limit(count),
+                where("forumId", "==", params.subRippleId),
+                limit(trueCount),
                 orderBy("timestamp", "desc")
             );
         }
 
-        if (offset) {
-            console.log(offset);
+        if (params.offset) {
+            // let trueOffset = offset + Number(1);
+            console.log("offset exists");
         }
 
         console.log(postsQuery);
@@ -100,7 +170,14 @@ const getPosts = async (
             postsArray.push(postObj);
         });
 
-        setPostState(postsArray);
+        if (postsArray.length === trueCount) {
+            console.log("overlow, show load more");
+            params.setLoadMore(true);
+        }
+
+        console.log(postsArray);
+
+        params.setPostState(postsArray);
     } catch (error) {
         console.log("Error fetching posts: " + error);
     }

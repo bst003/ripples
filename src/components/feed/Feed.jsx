@@ -22,29 +22,52 @@ REFACTOR getData methods to take OBJ as argument?
 */
 
 const Feed = (props) => {
-    const { subRippleId } = props;
+    const { subRippleId, userGoogleId } = props;
 
     const [isLoading, setIsLoading] = useState(false);
 
     const [posts, setPosts] = useState([]);
 
-    // const [postsCount, setPostsCount] = useState(10);
+    const [loadMore, setLoadMore] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
 
-        let idParam = null;
-        if (subRippleId) {
-            idParam = subRippleId;
-        }
+        const constructQueryParams = () => {
+            const queryParams = {
+                setPostState: setPosts,
+                setLoadMore: setLoadMore,
+                count: 10,
+            };
+
+            if (subRippleId) {
+                queryParams.subRippleId = subRippleId;
+            }
+
+            if (userGoogleId) {
+                queryParams.userGoogleId = userGoogleId;
+            }
+
+            if (posts) {
+                queryParams.offset = posts.length;
+            }
+
+            return queryParams;
+        };
+
+        // let idParam = null;
+        // if (subRippleId) {
+        //     idParam = subRippleId;
+        // }
 
         const getPostsUpdateLoad = async () => {
-            await getPosts(setPosts, null, idParam);
+            // await getPosts(setPosts, null, idParam);
+            await getPosts(constructQueryParams());
             setIsLoading(false);
         };
 
         getPostsUpdateLoad();
-    }, [subRippleId]);
+    }, [subRippleId, userGoogleId]);
 
     const feedContent = () => {
         if (isLoading) {
@@ -74,16 +97,23 @@ const Feed = (props) => {
         }
     };
 
+    const loadMoreContent = () => {
+        if (loadMore) {
+            return <LoadMore />;
+        }
+    };
+
     return (
         <section className="posts-feed">
             {feedContent()}
-            <LoadMore />
+            {loadMoreContent()}
         </section>
     );
 };
 
 Feed.propTypes = {
     subRippleId: PropTypes.string,
+    userGoogleId: PropTypes.string,
 };
 
 export default Feed;
