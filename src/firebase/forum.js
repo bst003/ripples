@@ -24,7 +24,7 @@ const getForum = async (setForumState, subRippleId = null, subRippleSlug = null)
 
         const forumObj = {};
         forumQuerySnapshot.forEach((doc) => {
-            console.log(doc.data());
+            // console.log(doc.data());
 
             forumObj.id = doc.id;
             forumObj.label = doc.data().label;

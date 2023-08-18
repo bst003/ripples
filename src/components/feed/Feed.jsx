@@ -30,38 +30,42 @@ const Feed = (props) => {
 
     const [loadMore, setLoadMore] = useState(false);
 
+    const constructQueryParams = () => {
+        console.log("constructing params now");
+        const queryParams = {
+            setPostState: setPosts,
+            setLoadMore: setLoadMore,
+            count: 10,
+        };
+
+        if (subRippleId) {
+            queryParams.subRippleId = subRippleId;
+        }
+
+        if (userGoogleId) {
+            queryParams.userGoogleId = userGoogleId;
+        }
+
+        queryParams.currentPosts = [];
+        if (posts) {
+            queryParams.currentPosts = posts;
+        }
+
+        console.log(queryParams);
+
+        return queryParams;
+    };
+
+    const loadMorePosts = () => {
+        if (loadMore) {
+            getPosts(constructQueryParams());
+        }
+    };
+
     useEffect(() => {
         setIsLoading(true);
 
-        const constructQueryParams = () => {
-            const queryParams = {
-                setPostState: setPosts,
-                setLoadMore: setLoadMore,
-                count: 10,
-            };
-
-            if (subRippleId) {
-                queryParams.subRippleId = subRippleId;
-            }
-
-            if (userGoogleId) {
-                queryParams.userGoogleId = userGoogleId;
-            }
-
-            if (posts) {
-                queryParams.offset = posts.length;
-            }
-
-            return queryParams;
-        };
-
-        // let idParam = null;
-        // if (subRippleId) {
-        //     idParam = subRippleId;
-        // }
-
         const getPostsUpdateLoad = async () => {
-            // await getPosts(setPosts, null, idParam);
             await getPosts(constructQueryParams());
             setIsLoading(false);
         };
@@ -99,7 +103,7 @@ const Feed = (props) => {
 
     const loadMoreContent = () => {
         if (loadMore) {
-            return <LoadMore />;
+            return <LoadMore triggerLoadMore={loadMorePosts} />;
         }
     };
 

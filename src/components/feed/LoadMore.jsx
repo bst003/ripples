@@ -1,9 +1,17 @@
 import PropTypes from "prop-types";
 
 const LoadMore = (props) => {
-    const { timestamp } = props;
+    const { triggerLoadMore } = props;
 
-    return <div className="timestamp">Load more</div>;
+    return (
+        <button className="btn-el" type="button" onClick={triggerLoadMore}>
+            Load more
+        </button>
+    );
+};
+
+LoadMore.propTypes = {
+    triggerLoadMore: PropTypes.func.isRequired,
 };
 
 export default LoadMore;

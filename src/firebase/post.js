@@ -1,5 +1,6 @@
 import {
     addDoc,
+    getDoc,
     deleteDoc,
     serverTimestamp,
     collection,
@@ -8,6 +9,7 @@ import {
     getDocs,
     limit,
     orderBy,
+    startAt,
     where,
     query,
 } from "firebase/firestore/lite";
@@ -143,16 +145,29 @@ const getPosts = async (params) => {
             );
         }
 
-        if (params.offset) {
-            // let trueOffset = offset + Number(1);
-            console.log("offset exists");
+        if (params.currentPosts.length > 0) {
+            const startingPointDocId = params.currentPosts[params.currentPosts.length - 1].id;
+            console.log(startingPointDocId);
+            const startingPointDocRef = await getDoc(
+                doc(getFirestore(), "posts", startingPointDocId)
+            );
+
+            console.log("------------------");
+            console.log(startingPointDocRef);
+
+            postsQuery = query(
+                collection(getFirestore(), "posts"),
+                limit(trueCount),
+                orderBy("timestamp", "desc"),
+                startAt(startingPointDocRef)
+            );
         }
 
-        console.log(postsQuery);
+        // console.log(postsQuery);
 
         const postsQuerySnapshot = await getDocs(postsQuery);
 
-        console.log(postsQuerySnapshot._docs);
+        // console.log(postsQuerySnapshot._docs);
 
         const postsArray = [];
         postsQuerySnapshot.forEach((doc) => {
@@ -173,11 +188,15 @@ const getPosts = async (params) => {
         if (postsArray.length === trueCount) {
             console.log("overlow, show load more");
             params.setLoadMore(true);
+            postsArray.pop();
         }
 
-        console.log(postsArray);
+        let spreadPosts = [];
+        if (params.currentPosts) {
+            spreadPosts = params.currentPosts;
+        }
 
-        params.setPostState(postsArray);
+        params.setPostState([...spreadPosts, ...postsArray]);
     } catch (error) {
         console.log("Error fetching posts: " + error);
     }
