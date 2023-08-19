@@ -146,10 +146,10 @@ const getPosts = async (params) => {
         }
 
         if (params.currentPosts.length > 0) {
-            const startingPointDocId = params.currentPosts[params.currentPosts.length - 1].id;
-            console.log(startingPointDocId);
+            // const startingPointDocId = params.currentPosts[params.currentPosts.length - 1].id;
+            console.log(params.loadMoreStartAt);
             const startingPointDocRef = await getDoc(
-                doc(getFirestore(), "posts", startingPointDocId)
+                doc(getFirestore(), "posts", params.loadMoreStartAt)
             );
 
             console.log("------------------");
@@ -188,7 +188,10 @@ const getPosts = async (params) => {
         if (postsArray.length === trueCount) {
             console.log("overlow, show load more");
             params.setLoadMore(true);
+            params.setLoadMoreStartAt(postsArray[postsArray.length - 1].id);
             postsArray.pop();
+        } else {
+            params.setLoadMore(false);
         }
 
         let spreadPosts = [];

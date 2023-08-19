@@ -30,11 +30,15 @@ const Feed = (props) => {
 
     const [loadMore, setLoadMore] = useState(false);
 
+    const [loadMoreStartAt, setLoadMoreStartAt] = useState(null);
+
     const constructQueryParams = () => {
         console.log("constructing params now");
         const queryParams = {
             setPostState: setPosts,
             setLoadMore: setLoadMore,
+            setLoadMoreStartAt: setLoadMoreStartAt,
+            loadMoreStartAt: loadMoreStartAt,
             count: 10,
         };
 
