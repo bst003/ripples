@@ -40,134 +40,74 @@ const getPost = async (setPostState, postId = null) => {
     }
 };
 
-// const getPosts = async (
-//     setPostState,
-//     userGoogleId = null,
-//     subRippleId = null,
-//     offset = null,
-//     count = 10
-// ) => {
-//     let trueCount = count + Number(1);
-//     console.log(`count is ${trueCount}`);
-//     try {
-//         let postsQuery = query(
-//             collection(getFirestore(), "posts"),
-//             limit(trueCount),
-//             orderBy("timestamp", "desc")
-//         );
+const setPostsQuery = async (params, trueCount) => {
+    let postsQuery = query(
+        collection(getFirestore(), "posts"),
+        limit(trueCount),
+        orderBy("timestamp", "desc")
+    );
 
-//         if (userGoogleId) {
-//             // console.log(userGoogleId);
-//             postsQuery = query(
-//                 collection(getFirestore(), "posts"),
-//                 where("userGoogleId", "==", userGoogleId),
-//                 limit(trueCount),
-//                 orderBy("timestamp", "desc")
-//             );
-//         }
-
-//         if (subRippleId) {
-//             console.log("we have a sub rippkle id");
-//             postsQuery = query(
-//                 collection(getFirestore(), "posts"),
-//                 where("forumId", "==", subRippleId),
-//                 limit(trueCount),
-//                 orderBy("timestamp", "desc")
-//             );
-//         }
-
-//         if (offset) {
-//             let trueOffset = offset + Number(1);
-//             // console.log()
-//         }
-
-//         console.log(postsQuery);
-
-//         const postsQuerySnapshot = await getDocs(postsQuery);
-
-//         console.log(postsQuerySnapshot._docs);
-
-//         const postsArray = [];
-//         postsQuerySnapshot.forEach((doc) => {
-//             const postObj = {
-//                 id: doc.id,
-//                 title: doc.data().title,
-//                 content: doc.data().content,
-//                 userGoogleId: doc.data().userGoogleId,
-//                 forumId: doc.data().forumId,
-//                 timestamp: doc.data().timestamp.toMillis(),
-//             };
-
-//             console.log(postObj);
-
-//             postsArray.push(postObj);
-//         });
-
-//         if (postsArray.length === trueCount) {
-//             console.log("overlow, show load more");
-//         }
-
-//         console.log(postsArray);
-
-//         setPostState(postsArray);
-//     } catch (error) {
-//         console.log("Error fetching posts: " + error);
-//     }
-// };
-
-const getPosts = async (params) => {
-    let trueCount = params.count + Number(1);
-    console.log(`count is ${trueCount}`);
-    try {
-        let postsQuery = query(
+    if (params.userGoogleId) {
+        postsQuery = query(
             collection(getFirestore(), "posts"),
+            where("userGoogleId", "==", params.userGoogleId),
             limit(trueCount),
             orderBy("timestamp", "desc")
         );
+    }
+
+    if (params.subRippleId) {
+        postsQuery = query(
+            collection(getFirestore(), "posts"),
+            where("forumId", "==", params.subRippleId),
+            limit(trueCount),
+            orderBy("timestamp", "desc")
+        );
+    }
+
+    if (params.currentPosts.length > 0) {
+        const startingPointDocRef = await getDoc(
+            doc(getFirestore(), "posts", params.loadMoreStartAt)
+        );
+
+        postsQuery = query(
+            collection(getFirestore(), "posts"),
+            limit(trueCount),
+            orderBy("timestamp", "desc"),
+            startAt(startingPointDocRef)
+        );
 
         if (params.userGoogleId) {
-            // console.log(userGoogleId);
             postsQuery = query(
                 collection(getFirestore(), "posts"),
                 where("userGoogleId", "==", params.userGoogleId),
-                limit(trueCount),
-                orderBy("timestamp", "desc")
-            );
-        }
-
-        if (params.subRippleId) {
-            console.log("we have a sub rippkle id");
-            postsQuery = query(
-                collection(getFirestore(), "posts"),
-                where("forumId", "==", params.subRippleId),
-                limit(trueCount),
-                orderBy("timestamp", "desc")
-            );
-        }
-
-        if (params.currentPosts.length > 0) {
-            // const startingPointDocId = params.currentPosts[params.currentPosts.length - 1].id;
-            console.log(params.loadMoreStartAt);
-            const startingPointDocRef = await getDoc(
-                doc(getFirestore(), "posts", params.loadMoreStartAt)
-            );
-
-            console.log("------------------");
-            console.log(startingPointDocRef);
-
-            postsQuery = query(
-                collection(getFirestore(), "posts"),
                 limit(trueCount),
                 orderBy("timestamp", "desc"),
                 startAt(startingPointDocRef)
             );
         }
 
-        // console.log(postsQuery);
+        if (params.subRippleId) {
+            postsQuery = query(
+                collection(getFirestore(), "posts"),
+                where("forumId", "==", params.subRippleId),
+                limit(trueCount),
+                orderBy("timestamp", "desc"),
+                startAt(startingPointDocRef)
+            );
+        }
+    }
+
+    return postsQuery;
+};
+
+const getPosts = async (params) => {
+    let trueCount = params.count + Number(1);
+    console.log(`count is ${trueCount}`);
+    try {
+        let postsQuery = await setPostsQuery(params, trueCount);
 
         const postsQuerySnapshot = await getDocs(postsQuery);
-
-        // console.log(postsQuerySnapshot._docs);
 
         const postsArray = [];
         postsQuerySnapshot.forEach((doc) => {
