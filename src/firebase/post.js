@@ -125,13 +125,14 @@ const getPosts = async (params) => {
             postsArray.push(postObj);
         });
 
+        // If there are more posts after the initial count param
+        // then set the starting point for loading more and remove the last
+        // item in postsArray
         if (postsArray.length === trueCount) {
-            console.log("overlow, show load more");
-            params.setLoadMore(true);
-            params.setLoadMoreStartAt(postsArray[postsArray.length - 1].id);
+            params.setLoadMoreStartPointID(postsArray[postsArray.length - 1].id);
             postsArray.pop();
         } else {
-            params.setLoadMore(false);
+            params.setLoadMoreStartPointID(null);
         }
 
         let spreadPosts = [];

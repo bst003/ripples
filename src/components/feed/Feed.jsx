@@ -28,17 +28,15 @@ const Feed = (props) => {
 
     const [posts, setPosts] = useState([]);
 
-    const [loadMore, setLoadMore] = useState(false);
-
-    const [loadMoreStartAt, setLoadMoreStartAt] = useState(null);
+    // Stores the ID of the starting point of the next batch of loaded posts
+    const [loadMoreStartPointID, setLoadMoreStartPointID] = useState(null);
 
     const constructQueryParams = () => {
         console.log("constructing params now");
         const queryParams = {
             setPostState: setPosts,
-            setLoadMore: setLoadMore,
-            setLoadMoreStartAt: setLoadMoreStartAt,
-            loadMoreStartAt: loadMoreStartAt,
+            setLoadMoreStartPointID: setLoadMoreStartPointID,
+            loadMoreStartPointID: loadMoreStartPointID,
             count: 10,
         };
 
@@ -61,7 +59,7 @@ const Feed = (props) => {
     };
 
     const loadMorePosts = () => {
-        if (loadMore) {
+        if (loadMoreStartPointID) {
             getPosts(constructQueryParams());
         }
     };
@@ -106,7 +104,7 @@ const Feed = (props) => {
     };
 
     const loadMoreContent = () => {
-        if (loadMore) {
+        if (loadMoreStartPointID) {
             return <LoadMore triggerLoadMore={loadMorePosts} />;
         }
     };
