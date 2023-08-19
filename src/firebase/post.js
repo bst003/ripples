@@ -67,7 +67,7 @@ const setPostsQuery = async (params, trueCount) => {
 
     if (params.currentPosts.length > 0) {
         const startingPointDocRef = await getDoc(
-            doc(getFirestore(), "posts", params.loadMoreStartAt)
+            doc(getFirestore(), "posts", params.loadMoreStartPointID)
         );
 
         postsQuery = query(
@@ -98,6 +98,8 @@ const setPostsQuery = async (params, trueCount) => {
         }
     }
 
+    console.log("end of query");
+
     return postsQuery;
 };
 
@@ -125,10 +127,9 @@ const getPosts = async (params) => {
             postsArray.push(postObj);
         });
 
-        // If there are more posts after the initial count param
-        // then set the starting point for loading more and remove the last
-        // item in postsArray
         if (postsArray.length === trueCount) {
+            console.log("overlow, show load more");
+            // params.setLoadMore(true);
             params.setLoadMoreStartPointID(postsArray[postsArray.length - 1].id);
             postsArray.pop();
         } else {

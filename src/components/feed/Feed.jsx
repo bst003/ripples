@@ -53,8 +53,6 @@ const Feed = (props) => {
             queryParams.currentPosts = posts;
         }
 
-        console.log(queryParams);
-
         return queryParams;
     };
 
