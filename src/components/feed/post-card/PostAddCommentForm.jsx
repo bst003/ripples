@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { serverTimestamp } from "firebase/firestore/lite";
 
 import { submitComment } from "../../../firebase/comment";
+
+import "./PostAddCommentForm.scss";
 /*
 
 Need to pass following properties
@@ -53,7 +55,7 @@ const PostAddCommentForm = (props) => {
         <form className="pc__add-comment-form" onSubmit={submitCommentForm}>
             <div className="form-field">
                 <label htmlFor="post-comment">Comment</label>
-                <textarea id="post-comment" name="post-comment" maxLength="500" required></textarea>
+                <textarea id="post-comment" name="post-comment" maxLength="300" required></textarea>
             </div>
 
             <span className="form-error-msg"></span>

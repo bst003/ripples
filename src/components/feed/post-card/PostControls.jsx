@@ -101,7 +101,11 @@ const PostControls = (props) => {
         if (userData) {
             return (
                 <>
-                    <button className="control-button" type="button" onClick={toggleForm}>
+                    <button
+                        className={(addComment ? "active" : "") + " control-button"}
+                        type="button"
+                        onClick={toggleForm}
+                    >
                         <i className="fa-solid fa-comment"></i>
                     </button>
                     <Link className="control-button" to={"/post/" + postId}>
