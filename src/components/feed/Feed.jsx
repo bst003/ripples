@@ -35,6 +35,7 @@ const Feed = (props) => {
         console.log("constructing params now");
         const queryParams = {
             setPostState: setPosts,
+            // setIsLoading: setIsLoading,
             setLoadMoreStartPointID: setLoadMoreStartPointID,
             loadMoreStartPointID: loadMoreStartPointID,
             count: 10,
@@ -56,9 +57,11 @@ const Feed = (props) => {
         return queryParams;
     };
 
-    const loadMorePosts = () => {
+    const loadMorePosts = async () => {
         if (loadMoreStartPointID) {
-            getPosts(constructQueryParams());
+            setIsLoading(true);
+            await getPosts(constructQueryParams());
+            setIsLoading(false);
         }
     };
 
@@ -74,7 +77,7 @@ const Feed = (props) => {
     }, [subRippleId, userGoogleId]);
 
     const feedContent = () => {
-        if (isLoading) {
+        if (isLoading && posts.length === 0) {
             return <LoadingIcon />;
         } else {
             if (posts.length > 0) {
@@ -103,7 +106,12 @@ const Feed = (props) => {
 
     const loadMoreContent = () => {
         if (loadMoreStartPointID) {
-            return <LoadMore triggerLoadMore={loadMorePosts} />;
+            return (
+                <>
+                    {isLoading && posts.length > 0 && <LoadingIcon />}
+                    <LoadMore triggerLoadMore={loadMorePosts} />
+                </>
+            );
         }
     };
 
