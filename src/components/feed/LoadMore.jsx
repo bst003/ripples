@@ -4,9 +4,11 @@ const LoadMore = (props) => {
     const { triggerLoadMore } = props;
 
     return (
-        <button className="btn-el" type="button" onClick={triggerLoadMore}>
-            Load more
-        </button>
+        <div className="btns-contain center">
+            <button className="btn-el " type="button" onClick={triggerLoadMore}>
+                Load more
+            </button>
+        </div>
     );
 };
 
