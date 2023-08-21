@@ -6,6 +6,8 @@ import { getComments } from "../../../firebase/comment";
 
 import LoadingIcon from "../../misc/LoadingIcon.jsx";
 
+import PostComment from "./PostComment";
+
 import "./PostCommentsFeed.scss";
 
 /*
@@ -43,7 +45,14 @@ const PostCommentsFeed = (props) => {
     const appendNewComments = () => {
         if (newComments.length > 0) {
             const newCommentItems = newComments.map((comment, index) => {
-                return <li key={index}>{comment.content}</li>;
+                return (
+                    <PostComment
+                        key={index}
+                        content={comment.content}
+                        userGoogleId={comment.userGoogleId}
+                        timestamp={comment.timestamp}
+                    />
+                );
             });
 
             const newCommentItemsRev = newCommentItems.reverse();
@@ -55,7 +64,14 @@ const PostCommentsFeed = (props) => {
     const loadedCommentsContent = () => {
         if (comments.length > 0) {
             const commentItems = comments.map((comment) => {
-                return <li key={comment.id}>{comment.content}</li>;
+                return (
+                    <PostComment
+                        key={comment.id}
+                        content={comment.content}
+                        userGoogleId={comment.userGoogleId}
+                        timestamp={comment.timestamp}
+                    />
+                );
             });
 
             return commentItems;
@@ -79,15 +95,6 @@ const PostCommentsFeed = (props) => {
                     {noCommentsContent()}
                 </>
             );
-            // if (comments.length > 0) {
-            //     const commentItems = comments.map((comment) => {
-            //         return <li key={comment.id}>{comment.content}</li>;
-            //     });
-
-            //     return commentItems;
-            // } else {
-            //     return <>No comments found</>;
-            // }
         }
     };
 

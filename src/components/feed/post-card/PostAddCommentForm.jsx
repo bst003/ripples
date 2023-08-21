@@ -1,13 +1,11 @@
 import PropTypes from "prop-types";
 
-import { serverTimestamp } from "firebase/firestore/lite";
-
 import { submitComment } from "../../../firebase/comment";
 
 import "./PostAddCommentForm.scss";
 /*
 
-Need to pass following properties
+Need to pass following properties 
     - content
     - postId (prop)
     - userGoogleId (prop)
@@ -40,7 +38,7 @@ const PostAddCommentForm = (props) => {
             toggleCommentForm();
             clearFormMessages(form);
 
-            commentObj.timestamp = serverTimestamp();
+            commentObj.timestamp = Math.abs(new Date().getTime());
 
             passHandleNewComment(commentObj);
         } else {

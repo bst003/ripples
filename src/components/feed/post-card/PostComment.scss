@@ -1,0 +1,17 @@
+.pc__comment{
+
+    &:not(:last-of-type){
+        margin: 0px 0px 16px;
+        padding: 0px 0px 16px;
+        border-bottom: 1px solid var(--brandOffWhite);
+    }
+
+    .header{
+        margin: 0px 0px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px; 
+    }
+
+}
