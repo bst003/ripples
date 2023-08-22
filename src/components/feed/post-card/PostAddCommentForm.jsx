@@ -38,7 +38,10 @@ const PostAddCommentForm = (props) => {
             toggleCommentForm();
             clearFormMessages(form);
 
+            commentObj.id = submittedCommentId;
             commentObj.timestamp = Math.abs(new Date().getTime());
+
+            console.log(commentObj);
 
             passHandleNewComment(commentObj);
         } else {
