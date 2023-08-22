@@ -8,6 +8,10 @@ import UserBadge from "../../universal/UserBadge";
 
 import TimeStamp from "../TimeStamp";
 
+import DeleteModal from "./DeleteModal";
+
+import { deleteComment } from "../../../firebase/comment";
+
 import "./PostComment.scss";
 
 const PostComment = (props) => {
@@ -20,6 +24,16 @@ const PostComment = (props) => {
     //     setisDeleted(true);
     // };
 
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
+    const handleDeleteComment = () => {
+        console.log("comment is deleted");
+    };
+
     const postContentComment = () => {
         if (!isDeleted) {
             return (
@@ -27,7 +41,21 @@ const PostComment = (props) => {
                     <div className="header">
                         <UserBadge userGoogleId={userGoogleId} isLink={true} />
                         <TimeStamp timestamp={timestamp} />
-                        {userData.googleId === userGoogleId && <>delete</>}
+                        {userData && userData.googleId === userGoogleId && (
+                            <>
+                                <button type="button" onClick={() => setModalIsOpen(true)}>
+                                    <i className="fa-solid fa-trash"></i>
+                                </button>
+                                <DeleteModal
+                                    entityId={id}
+                                    modalIsOpen={modalIsOpen}
+                                    closeModal={closeModal}
+                                    entityName="comment"
+                                    deleteEntity={deleteComment}
+                                    passHandleDelete={handleDeleteComment}
+                                />
+                            </>
+                        )}
                     </div>
                     {content}
                 </div>

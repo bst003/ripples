@@ -8,7 +8,9 @@ import PropTypes from "prop-types";
 
 import PostAddCommentForm from "./PostAddCommentForm";
 
-import PostDeleteModal from "./PostDeleteModal";
+import DeleteModal from "./DeleteModal";
+
+import { deletePost } from "../../../firebase/post";
 
 import "./PostControls.scss";
 
@@ -82,11 +84,13 @@ const PostControls = (props) => {
                     >
                         <i className="fa-solid fa-trash"></i>
                     </button>
-                    <PostDeleteModal
-                        postId={postId}
+                    <DeleteModal
+                        entityId={postId}
                         modalIsOpen={modalIsOpen}
                         closeModal={closeModal}
-                        passHandleDeletePost={handleDeletePost}
+                        entityName="post"
+                        deleteEntity={deletePost}
+                        passHandleDelete={handleDeletePost}
                     />
                 </>
             );

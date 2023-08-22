@@ -48,6 +48,7 @@ const PostCommentsFeed = (props) => {
                 return (
                     <PostComment
                         key={index}
+                        id={comment.id}
                         content={comment.content}
                         userGoogleId={comment.userGoogleId}
                         timestamp={comment.timestamp}
@@ -67,6 +68,7 @@ const PostCommentsFeed = (props) => {
                 return (
                     <PostComment
                         key={comment.id}
+                        id={comment.id}
                         content={comment.content}
                         userGoogleId={comment.userGoogleId}
                         timestamp={comment.timestamp}

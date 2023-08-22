@@ -1,7 +1,9 @@
 import {
     collection,
     getFirestore,
+    doc,
     addDoc,
+    deleteDoc,
     getDocs,
     where,
     query,
@@ -77,4 +79,16 @@ const submitComment = async (commentObj) => {
     }
 };
 
-export { getComments, submitComment };
+const deleteComment = async (postId) => {
+    console.log(postId);
+    try {
+        const deletedDoc = await deleteDoc(doc(getFirestore(), "comments", postId));
+        console.log(deletedDoc);
+        return true;
+    } catch (error) {
+        console.log("Error deleting comment: " + error);
+        return false;
+    }
+};
+
+export { getComments, submitComment, deleteComment };

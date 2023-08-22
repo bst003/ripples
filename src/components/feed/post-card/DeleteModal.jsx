@@ -2,18 +2,15 @@ import Modal from "react-modal";
 
 import PropTypes from "prop-types";
 
-import { deletePost } from "../../../firebase/post";
-
-const PostDeleteModal = (props) => {
-    const { postId, modalIsOpen, closeModal, passHandleDeletePost } = props;
+const DeleteModal = (props) => {
+    const { entityId, modalIsOpen, closeModal, entityName, deleteEntity, passHandleDelete } = props;
 
     Modal.setAppElement("#root");
 
     const triggerDeletePost = async () => {
-        const postDeleted = await deletePost(postId);
-        if (postDeleted) {
-            console.log("the post has been deleted, remove from content");
-            passHandleDeletePost();
+        const entityDeleted = await deleteEntity(entityId);
+        if (entityDeleted) {
+            passHandleDelete();
             closeModal();
         }
     };
@@ -30,7 +27,7 @@ const PostDeleteModal = (props) => {
                 <span className="screen-reader-text">close</span>
                 <i className="fas fa-times"></i>
             </button>
-            <p>Are you sure you want to delete this post?</p>
+            <p>Are you sure you want to delete this {entityName}?</p>
             <button className="btn-el" onClick={triggerDeletePost}>
                 yes
             </button>
@@ -38,11 +35,13 @@ const PostDeleteModal = (props) => {
     );
 };
 
-PostDeleteModal.propTypes = {
-    postId: PropTypes.string.isRequired,
+DeleteModal.propTypes = {
+    entityId: PropTypes.string.isRequired,
     modalIsOpen: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
-    passHandleDeletePost: PropTypes.func.isRequired,
+    entityName: PropTypes.string.isRequired,
+    deleteEntity: PropTypes.func.isRequired,
+    passHandleDelete: PropTypes.func.isRequired,
 };
 
-export default PostDeleteModal;
+export default DeleteModal;

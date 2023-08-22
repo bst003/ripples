@@ -157,8 +157,6 @@ const deletePost = async (postId) => {
         console.log("Error deleting post: " + error);
         return false;
     }
-
-    // Need to delete all comments associated with post or do I?
 };
 
 const submitPost = async (postObj) => {
