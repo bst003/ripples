@@ -30,17 +30,28 @@ const PostCommentsFeed = (props) => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const [comments, setComment] = useState([]);
+    const [comments, setComments] = useState([]);
     useEffect(() => {
         setIsLoading(true);
 
         const getCommentsUpdateLoad = async () => {
-            await getComments(setComment, null, postId);
+            await getComments(setComments, null, postId);
             setIsLoading(false);
         };
 
         getCommentsUpdateLoad();
     }, [postId]);
+
+    const handleDeleteComment = (commentId) => {
+        console.log("this has reached the comment feed");
+
+        const filteredComments = comments.filter((comment) => comment.id !== commentId);
+        if (filteredComments.length !== comments.length) {
+            setComments(filteredComments);
+        } else {
+            // pass commentId to PostCard and remove from newComments
+        }
+    };
 
     const appendNewComments = () => {
         if (newComments.length > 0) {
@@ -52,6 +63,7 @@ const PostCommentsFeed = (props) => {
                         content={comment.content}
                         userGoogleId={comment.userGoogleId}
                         timestamp={comment.timestamp}
+                        passHandleDelete={handleDeleteComment}
                     />
                 );
             });
@@ -72,6 +84,7 @@ const PostCommentsFeed = (props) => {
                         content={comment.content}
                         userGoogleId={comment.userGoogleId}
                         timestamp={comment.timestamp}
+                        passHandleDelete={handleDeleteComment}
                     />
                 );
             });

@@ -79,10 +79,10 @@ const submitComment = async (commentObj) => {
     }
 };
 
-const deleteComment = async (postId) => {
-    console.log(postId);
+const deleteComment = async (commentId) => {
+    console.log(commentId);
     try {
-        const deletedDoc = await deleteDoc(doc(getFirestore(), "comments", postId));
+        const deletedDoc = await deleteDoc(doc(getFirestore(), "comments", commentId));
         console.log(deletedDoc);
         return true;
     } catch (error) {

@@ -14,24 +14,27 @@ import { deleteComment } from "../../../firebase/comment";
 
 import "./PostComment.scss";
 
+/*
+Should isDeleted be removed from PostComment since the comments and 
+newComments state is updated aad the comment will disappear anyway?
+*/
+
 const PostComment = (props) => {
-    const { id, content, userGoogleId, timestamp } = props;
+    const { id, content, userGoogleId, timestamp, passHandleDelete } = props;
 
     const userData = useContext(UserContext);
 
-    const [isDeleted, setisDeleted] = useState(false);
-    // const handleDeletePost = () => {
-    //     setisDeleted(true);
-    // };
+    const [isDeleted, setIsDeleted] = useState(false);
+    const handleDeleteComment = () => {
+        console.log("comment is deleted");
+        setIsDeleted(true);
+        passHandleDelete(id);
+    };
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const closeModal = () => {
         setModalIsOpen(false);
-    };
-
-    const handleDeleteComment = () => {
-        console.log("comment is deleted");
     };
 
     const postContentComment = () => {
@@ -73,6 +76,7 @@ PostComment.propTypes = {
     userGoogleId: PropTypes.string,
     forumId: PropTypes.string,
     timestamp: PropTypes.number,
+    passHandleDelete: PropTypes.func,
 };
 
 export default PostComment;
