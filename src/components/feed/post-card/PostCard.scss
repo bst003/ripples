@@ -3,6 +3,7 @@
 
     display: flex;
     justify-content: space-between;
+    row-gap: 5px;
 
     &:not(:last-of-type){
         margin: 0px 0px 30px; 
@@ -36,6 +37,16 @@
     &__base{
         padding: var(--pcPadding);
         border-bottom: 1px solid var(--siteBorderColor);
+    }
+
+    @media screen and (max-width: 768px){
+        flex-direction: column;
+        
+        &__post,
+        &__comments{
+            width: 100%;
+        }
+
     }
 
 }
