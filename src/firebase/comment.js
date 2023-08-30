@@ -4,11 +4,83 @@ import {
     doc,
     addDoc,
     deleteDoc,
+    getDoc,
     getDocs,
     where,
     query,
+    limit,
+    orderBy,
+    startAt,
     serverTimestamp,
 } from "firebase/firestore/lite";
+
+const setCommentsQuery = async (params, trueCount) => {
+    let commentsQuery = query(
+        collection(getFirestore(), "comments"),
+        where("postId", "==", params.postId),
+        limit(trueCount),
+        orderBy("timestamp", "desc")
+    );
+
+    if (params.currentPosts.length > 0) {
+        const startingPointDocRef = await getDoc(
+            doc(getFirestore(), "comments", params.loadMoreStartPointID)
+        );
+
+        commentsQuery = query(
+            collection(getFirestore(), "comments"),
+            where("postId", "==", params.postId),
+            limit(trueCount),
+            orderBy("timestamp", "desc"),
+            startAt(startingPointDocRef)
+        );
+    }
+
+    return commentsQuery;
+};
+
+const getCommentsAlt = async (params) => {
+    let trueCount = params.count + Number(1);
+    try {
+        const commentsQuery = setCommentsQuery(params, trueCount);
+
+        const commentsQuerySnapshot = await getDocs(commentsQuery);
+
+        const commentsArray = [];
+        commentsQuerySnapshot.forEach((doc) => {
+            const commentObj = {
+                id: doc.id,
+                content: doc.data().content,
+                userGoogleId: doc.data().userGoogleId,
+                timestamp: doc.data().timestamp.toMillis(),
+            };
+
+            console.log(commentObj);
+
+            commentsArray.push(commentObj);
+        });
+
+        params.setCommentState(commentsArray);
+
+        if (commentsArray.length === trueCount) {
+            console.log("overlow, show load more");
+            // params.setLoadMore(true);
+            params.setLoadMoreStartPointID(commentsArray[commentsArray.length - 1].id);
+            commentsArray.pop();
+        } else {
+            params.setLoadMoreStartPointID(null);
+        }
+
+        let spreadComments = [];
+        if (params.currentComments) {
+            spreadComments = params.currentComments;
+        }
+
+        params.setPostState([...spreadComments, ...commentsArray]);
+    } catch (error) {
+        console.log("Error fetching comments: " + error);
+    }
+};
 
 const getComments = async (setCommentState, userGoogleId = null, postId = null, offset = null) => {
     try {
@@ -91,4 +163,4 @@ const deleteComment = async (commentId) => {
     }
 };
 
-export { getComments, submitComment, deleteComment };
+export { getComments, getCommentsAlt, submitComment, deleteComment };

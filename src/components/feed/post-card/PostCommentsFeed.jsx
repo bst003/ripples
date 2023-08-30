@@ -31,6 +31,35 @@ const PostCommentsFeed = (props) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const [comments, setComments] = useState([]);
+
+    // Stores the ID of the starting point of the next batch of loaded comments
+    const [loadMoreStartPointID, setLoadMoreStartPointID] = useState(null);
+
+    const constructCommentQueryParams = () => {
+        console.log("constructing params now");
+        const queryParams = {
+            setCommentState: setComments,
+            setLoadMoreStartPointID: setLoadMoreStartPointID,
+            loadMoreStartPointID: loadMoreStartPointID,
+            postId: postId,
+            count: 3,
+        };
+
+        queryParams.currentComments = [];
+        if (comments) {
+            queryParams.currentComments = comments;
+        }
+
+        return queryParams;
+    };
+
+    const loadMoreComments = async () => {
+        if (loadMoreStartPointID) {
+            setIsLoading(true);
+            await getComments(constructQueryParams());
+            setIsLoading(false);
+        }
+    };
     useEffect(() => {
         setIsLoading(true);
 
