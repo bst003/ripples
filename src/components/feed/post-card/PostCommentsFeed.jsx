@@ -6,6 +6,8 @@ import { getComments } from "../../../firebase/comment";
 
 import LoadingIcon from "../../misc/LoadingIcon.jsx";
 
+import LoadMore from "../LoadMore";
+
 import PostComment from "./PostComment";
 
 import "./PostCommentsFeed.scss";
@@ -35,6 +37,17 @@ const PostCommentsFeed = (props) => {
     // Stores the ID of the starting point of the next batch of loaded comments
     const [loadMoreStartPointID, setLoadMoreStartPointID] = useState(null);
 
+    // Load More Functions
+    // SEPARATE LOADING ICON FROM CONTENT DISPLAY
+    // ---------------------------------------------------
+    const loadMoreComments = async () => {
+        if (loadMoreStartPointID) {
+            setIsLoading(true);
+            await getComments(constructCommentQueryParams());
+            setIsLoading(false);
+        }
+    };
+
     const constructCommentQueryParams = () => {
         console.log("constructing params now");
         const queryParams = {
@@ -50,21 +63,16 @@ const PostCommentsFeed = (props) => {
             queryParams.currentComments = comments;
         }
 
+        console.log(queryParams);
+
         return queryParams;
     };
 
-    const loadMoreComments = async () => {
-        if (loadMoreStartPointID) {
-            setIsLoading(true);
-            await getComments(constructQueryParams());
-            setIsLoading(false);
-        }
-    };
     useEffect(() => {
         setIsLoading(true);
 
         const getCommentsUpdateLoad = async () => {
-            await getComments(setComments, null, postId);
+            await getComments(constructCommentQueryParams());
             setIsLoading(false);
         };
 
@@ -78,7 +86,9 @@ const PostCommentsFeed = (props) => {
         if (filteredComments.length !== comments.length) {
             setComments(filteredComments);
         } else {
+            // ---------------------------------------------------
             // pass commentId to PostCard and remove from newComments
+            // ---------------------------------------------------
         }
     };
 
@@ -103,6 +113,8 @@ const PostCommentsFeed = (props) => {
         }
     };
 
+    // Content Functions
+    // ---------------------------------------------------
     const loadedCommentsContent = () => {
         if (comments.length > 0) {
             const commentItems = comments.map((comment) => {
@@ -128,6 +140,17 @@ const PostCommentsFeed = (props) => {
         }
     };
 
+    const loadMoreContent = () => {
+        if (loadMoreStartPointID) {
+            return (
+                <>
+                    {isLoading && comments.length > 0 && <LoadingIcon />}
+                    <LoadMore triggerLoadMore={loadMoreComments} />
+                </>
+            );
+        }
+    };
+
     const PostCommentsFeedContent = () => {
         if (isLoading) {
             return <LoadingIcon />;
@@ -137,6 +160,7 @@ const PostCommentsFeed = (props) => {
                     {appendNewComments()}
                     {loadedCommentsContent()}
                     {noCommentsContent()}
+                    {loadMoreContent()}
                 </>
             );
         }

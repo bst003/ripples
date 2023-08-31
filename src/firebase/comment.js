@@ -22,10 +22,12 @@ const setCommentsQuery = async (params, trueCount) => {
         orderBy("timestamp", "desc")
     );
 
-    if (params.currentPosts.length > 0) {
+    if (params.currentComments.length > 0) {
+        console.log("pre ref");
         const startingPointDocRef = await getDoc(
             doc(getFirestore(), "comments", params.loadMoreStartPointID)
         );
+        console.log("post ref");
 
         commentsQuery = query(
             collection(getFirestore(), "comments"),
@@ -39,10 +41,11 @@ const setCommentsQuery = async (params, trueCount) => {
     return commentsQuery;
 };
 
-const getCommentsAlt = async (params) => {
+const getComments = async (params) => {
     let trueCount = params.count + Number(1);
     try {
-        const commentsQuery = setCommentsQuery(params, trueCount);
+        console.log("pre set");
+        const commentsQuery = await setCommentsQuery(params, trueCount);
 
         const commentsQuerySnapshot = await getDocs(commentsQuery);
 
@@ -60,7 +63,7 @@ const getCommentsAlt = async (params) => {
             commentsArray.push(commentObj);
         });
 
-        params.setCommentState(commentsArray);
+        // params.setCommentState(commentsArray);
 
         if (commentsArray.length === trueCount) {
             console.log("overlow, show load more");
@@ -76,12 +79,15 @@ const getCommentsAlt = async (params) => {
             spreadComments = params.currentComments;
         }
 
-        params.setPostState([...spreadComments, ...commentsArray]);
+        console.log(params.currentComments);
+
+        params.setCommentState([...spreadComments, ...commentsArray]);
     } catch (error) {
         console.log("Error fetching comments: " + error);
     }
 };
 
+/*
 const getComments = async (setCommentState, userGoogleId = null, postId = null, offset = null) => {
     try {
         let commentsQuery;
@@ -131,6 +137,7 @@ const getComments = async (setCommentState, userGoogleId = null, postId = null, 
         console.log("Error fetching posts: " + error);
     }
 };
+*/
 
 const submitComment = async (commentObj) => {
     console.log("test");
@@ -163,4 +170,4 @@ const deleteComment = async (commentId) => {
     }
 };
 
-export { getComments, getCommentsAlt, submitComment, deleteComment };
+export { getComments, submitComment, deleteComment };

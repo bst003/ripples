@@ -35,7 +35,6 @@ const Feed = (props) => {
         console.log("constructing params now");
         const queryParams = {
             setPostState: setPosts,
-            // setIsLoading: setIsLoading,
             setLoadMoreStartPointID: setLoadMoreStartPointID,
             loadMoreStartPointID: loadMoreStartPointID,
             count: 10,
