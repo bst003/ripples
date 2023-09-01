@@ -37,19 +37,9 @@ const PostCommentsFeed = (props) => {
     // Stores the ID of the starting point of the next batch of loaded comments
     const [loadMoreStartPointID, setLoadMoreStartPointID] = useState(null);
 
-    // Load More Functions
-    // SEPARATE LOADING ICON FROM CONTENT DISPLAY
+    // Query Related Methods and Effects
     // ---------------------------------------------------
-    const loadMoreComments = async () => {
-        if (loadMoreStartPointID) {
-            setIsLoading(true);
-            await getComments(constructCommentQueryParams());
-            setIsLoading(false);
-        }
-    };
-
     const constructCommentQueryParams = () => {
-        console.log("constructing params now");
         const queryParams = {
             setCommentState: setComments,
             setLoadMoreStartPointID: setLoadMoreStartPointID,
@@ -68,6 +58,7 @@ const PostCommentsFeed = (props) => {
         return queryParams;
     };
 
+    // Effects
     useEffect(() => {
         setIsLoading(true);
 
@@ -79,6 +70,28 @@ const PostCommentsFeed = (props) => {
         getCommentsUpdateLoad();
     }, [postId]);
 
+    // Load More Functions
+    // ---------------------------------------------------
+    const loadMoreComments = async () => {
+        if (loadMoreStartPointID) {
+            setIsLoading(true);
+            await getComments(constructCommentQueryParams());
+            setIsLoading(false);
+        }
+    };
+    const loadMoreContent = () => {
+        if (loadMoreStartPointID) {
+            return (
+                <>
+                    {isLoading && comments.length > 0 && <LoadingIcon />}
+                    {!isLoading && <LoadMore triggerLoadMore={loadMoreComments} />}
+                </>
+            );
+        }
+    };
+
+    // Single Comment Contents and Methods
+    // ---------------------------------------------------
     const handleDeleteComment = (commentId) => {
         console.log("this has reached the comment feed");
 
@@ -113,8 +126,6 @@ const PostCommentsFeed = (props) => {
         }
     };
 
-    // Content Functions
-    // ---------------------------------------------------
     const loadedCommentsContent = () => {
         if (comments.length > 0) {
             const commentItems = comments.map((comment) => {
@@ -134,20 +145,11 @@ const PostCommentsFeed = (props) => {
         }
     };
 
+    // Non-Single Comment Content Methods
+    // ---------------------------------------------------
     const noCommentsContent = () => {
         if (!comments.length && !newComments.length) {
             return <p>No comments found</p>;
-        }
-    };
-
-    const loadMoreContent = () => {
-        if (loadMoreStartPointID) {
-            return (
-                <>
-                    {isLoading && comments.length > 0 && <LoadingIcon />}
-                    {!isLoading && <LoadMore triggerLoadMore={loadMoreComments} />}
-                </>
-            );
         }
     };
 
