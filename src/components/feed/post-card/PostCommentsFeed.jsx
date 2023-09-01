@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import { getComments } from "../../../firebase/comment";
 
+import { filterCommentState } from "../../../util/filtering";
+
 import LoadingIcon from "../../misc/LoadingIcon.jsx";
 
 import LoadMore from "../LoadMore";
@@ -95,14 +97,18 @@ const PostCommentsFeed = (props) => {
     const handleDeleteComment = (commentId) => {
         console.log("this has reached the comment feed");
 
-        const filteredComments = comments.filter((comment) => comment.id !== commentId);
-        if (filteredComments.length !== comments.length) {
-            setComments(filteredComments);
-        } else {
-            // ---------------------------------------------------
-            // pass commentId to PostCard and remove from newComments
-            // ---------------------------------------------------
+        if (!filterCommentState(commentId, comments, setComments)) {
+            console.log("comment didn't filter, run in PostCard");
         }
+
+        // const filteredComments = comments.filter((comment) => comment.id !== commentId);
+        // if (filteredComments.length !== comments.length) {
+        //     setComments(filteredComments);
+        // } else {
+        //     // ---------------------------------------------------
+        //     // pass commentId to PostCard and remove from newComments
+        //     // ---------------------------------------------------
+        // }
     };
 
     const appendNewComments = () => {

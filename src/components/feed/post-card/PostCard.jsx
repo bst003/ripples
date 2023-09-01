@@ -23,6 +23,16 @@ const PostCard = (props) => {
         setNewComments([...newComments, commentObj]);
     };
 
+    // const filterCommentState = (commentId, commentsArr, setCommentState) => {
+    //     const filteredComments = commentsArr.filter((comment) => comment.id !== commentId);
+    //     if (filteredComments.length !== commentsArr.length) {
+    //         setCommentState(filteredComments);
+    //         return true;
+    //     }
+
+    //     return false;
+    // };
+
     const [isDeleted, setisDeleted] = useState(false);
     const handleDeletePost = () => {
         setisDeleted(true);
