@@ -108,7 +108,7 @@ const Feed = (props) => {
             return (
                 <>
                     {isLoading && posts.length > 0 && <LoadingIcon />}
-                    <LoadMore triggerLoadMore={loadMorePosts} />
+                    {!isLoading && <LoadMore triggerLoadMore={loadMorePosts} />}
                 </>
             );
         }

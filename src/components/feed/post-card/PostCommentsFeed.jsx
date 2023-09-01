@@ -145,14 +145,14 @@ const PostCommentsFeed = (props) => {
             return (
                 <>
                     {isLoading && comments.length > 0 && <LoadingIcon />}
-                    <LoadMore triggerLoadMore={loadMoreComments} />
+                    {!isLoading && <LoadMore triggerLoadMore={loadMoreComments} />}
                 </>
             );
         }
     };
 
     const PostCommentsFeedContent = () => {
-        if (isLoading) {
+        if (isLoading && comments.length <= 1) {
             return <LoadingIcon />;
         } else {
             return (
