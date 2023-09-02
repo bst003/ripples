@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { filterCommentState } from "../../../util/filtering";
+
 import PropTypes from "prop-types";
 
 import PostHeader from "./PostHeader.jsx";
@@ -21,6 +23,10 @@ const PostCard = (props) => {
     const handleNewComment = (commentObj) => {
         console.log("handling new comments");
         setNewComments([...newComments, commentObj]);
+    };
+
+    const filterNewCommentState = (commentId) => {
+        filterCommentState(commentId, newComments, setNewComments);
     };
 
     // const filterCommentState = (commentId, commentsArr, setCommentState) => {
@@ -63,7 +69,11 @@ const PostCard = (props) => {
                         />
                     </div>
                     <div className="pc__comments">
-                        <PostCommentsFeed postId={id} newComments={newComments} />
+                        <PostCommentsFeed
+                            postId={id}
+                            newComments={newComments}
+                            passFilterNewCommentState={filterNewCommentState}
+                        />
                     </div>
                 </div>
             )}

@@ -30,7 +30,7 @@ APPLY LOGIC TO REMOVE NO POSTS FOUND TEXT WHEN NEW COMMENT IS ADDED
 */
 
 const PostCommentsFeed = (props) => {
-    const { postId, newComments } = props;
+    const { postId, newComments, passFilterNewCommentState } = props;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -99,6 +99,7 @@ const PostCommentsFeed = (props) => {
 
         if (!filterCommentState(commentId, comments, setComments)) {
             console.log("comment didn't filter, run in PostCard");
+            passFilterNewCommentState(commentId);
         }
 
         // const filteredComments = comments.filter((comment) => comment.id !== commentId);
@@ -180,6 +181,7 @@ const PostCommentsFeed = (props) => {
 PostCommentsFeed.propTypes = {
     postId: PropTypes.string,
     newComments: PropTypes.array,
+    passFilterNewCommentState: PropTypes.func,
 };
 
 export default PostCommentsFeed;
