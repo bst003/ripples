@@ -1,6 +1,6 @@
 import { createUser, setUserDataAsState, userExists } from "../firebase/user.js";
 
-import { formatUserData } from "../util/formatting.js";
+import { formatUserData } from "../util/formatting.jsx";
 
 import {
     getAuth,

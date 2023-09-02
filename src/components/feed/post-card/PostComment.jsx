@@ -12,6 +12,8 @@ import DeleteModal from "./DeleteModal";
 
 import { deleteComment } from "../../../firebase/comment";
 
+import { formatContentIntoPara } from "../../../util/formatting";
+
 import "./PostComment.scss";
 
 /*
@@ -21,6 +23,27 @@ newComments state is updated aad the comment will disappear anyway?
 
 const PostComment = (props) => {
     const { id, content, userGoogleId, timestamp, passHandleDelete } = props;
+
+    console.log(content);
+
+    // const formatWhiteSpace = () => {
+    //     const contentArr = content.split("\n");
+    //     console.log(contentArr);
+    //     return contentArr;
+    // };
+
+    // console.log(formatWhiteSpace());
+
+    // const formattedContents = () => {
+    //     const test = formatWhiteSpace();
+    //     const newContent = test.map((para, index) => {
+    //         if (para !== "") {
+    //             return <p key={index}>{para}</p>;
+    //         }
+    //     });
+
+    //     return newContent;
+    // };
 
     const userData = useContext(UserContext);
 
@@ -60,7 +83,7 @@ const PostComment = (props) => {
                             </>
                         )}
                     </div>
-                    {content}
+                    <div className="pc__comment-body">{formatContentIntoPara(content)}</div>
                 </div>
             );
         }
