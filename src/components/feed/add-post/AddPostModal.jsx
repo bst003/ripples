@@ -7,6 +7,11 @@ const AddPostModal = (props) => {
 
     Modal.setAppElement("#root");
 
+    // used to prevent excessive amounts of modal in DOM
+    if (!modalIsOpen) {
+        return null;
+    }
+
     return (
         <Modal
             closeTimeoutMS={200}
