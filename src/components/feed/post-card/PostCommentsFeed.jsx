@@ -86,7 +86,7 @@ const PostCommentsFeed = (props) => {
             return (
                 <>
                     {isLoading && comments.length > 0 && <LoadingIcon />}
-                    {!isLoading && <LoadMore triggerLoadMore={loadMoreComments} />}
+                    {!isLoading && <LoadMore triggerLoadMore={loadMoreComments} isSmall={true} />}
                 </>
             );
         }

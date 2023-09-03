@@ -28,8 +28,6 @@ const SubRipple = () => {
     const setPageTitle = () => {
         if (slug && forum) {
             return forum.label;
-        } else {
-            return "Front Page";
         }
     };
 

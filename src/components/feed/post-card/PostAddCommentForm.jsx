@@ -1,6 +1,10 @@
+import { useContext } from "react";
+
 import PropTypes from "prop-types";
 
 import { submitComment } from "../../../firebase/comment";
+
+import UserContext from "../../universal/UserContext";
 
 import "./PostAddCommentForm.scss";
 /*
@@ -13,7 +17,9 @@ Need to pass following properties
 */
 
 const PostAddCommentForm = (props) => {
-    const { id, userGoogleId, toggleCommentForm, passHandleNewComment } = props;
+    const { id, toggleCommentForm, passHandleNewComment } = props;
+
+    const userData = useContext(UserContext);
 
     const clearFormMessages = (form) => {
         const formError = form.querySelector(".form-error-msg");
@@ -28,7 +34,7 @@ const PostAddCommentForm = (props) => {
 
         const commentObj = {
             postId: id,
-            userGoogleId: userGoogleId,
+            userGoogleId: userData.googleId,
             content: content.value,
         };
 

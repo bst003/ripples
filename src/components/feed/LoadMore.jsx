@@ -18,7 +18,7 @@ const LoadMore = (props) => {
 
 LoadMore.propTypes = {
     triggerLoadMore: PropTypes.func.isRequired,
-    isSmall: PropTypes.boolean,
+    isSmall: PropTypes.bool,
 };
 
 export default LoadMore;

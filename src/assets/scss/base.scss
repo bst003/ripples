@@ -90,7 +90,10 @@ body{
 
 // Base Typography
 ////////////////////////////////////////////////
-  
+
+a{
+    color: var(--brandBlue);
+}
 
 // Base Buttons
 ////////////////////////////////////////////////
@@ -119,8 +122,8 @@ button{
 
 %smallButton{
     padding: 6px 10px 5px;
-    font-size: 16px;
-}
+    font-size: 15px;
+} 
 
 .btns-contain {
     margin: 32px 0px;

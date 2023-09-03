@@ -8,6 +8,7 @@ import NonFeedLayout from "./templates/NonFeedLayout.jsx";
 import UserContext from "./components/universal/UserContext.jsx";
 
 import Home from "./views/Home.jsx";
+import About from "./views/About.jsx";
 import SubRipple from "./views/SubRipple.jsx";
 import SinglePost from "./views/SinglePost.jsx";
 import Profile from "./views/Profile.jsx";
@@ -28,12 +29,12 @@ const RouteSwitch = () => {
                         <Route element={<MainLayout />}>
                             <Route path="/" element={<Home />} />
                             <Route path="/r/:slug" element={<SubRipple />} />
-                            {/* <Route path="/post/:id" element={<SinglePost />} /> */}
-                            <Route path="/profile" element={<Profile />} />
                         </Route>
 
                         <Route element={<NonFeedLayout />}>
+                            <Route path="/profile/:username" element={<Profile />} />
                             <Route path="/post/:id" element={<SinglePost />} />
+                            <Route path="/about" element={<About />} />
                             <Route path="*" element={<NotFound />} />
                         </Route>
                     </Routes>

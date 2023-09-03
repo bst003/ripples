@@ -43,6 +43,27 @@ const getUserData = async (userId) => {
     }
 };
 
+const getUserIdByName = async (userName) => {
+    try {
+        const userQuery = query(
+            collection(getFirestore(), "users"),
+            where("userName", "==", userName),
+            limit(1)
+        );
+
+        const userQuerySnapshot = await getDocs(userQuery);
+
+        let userId;
+        userQuerySnapshot.forEach((doc) => {
+            userId = doc.data().googleId;
+        });
+
+        return userId;
+    } catch (error) {
+        console.log("Error fetching user data: " + error);
+    }
+};
+
 const setUserDataAsState = async (setState, userGoogleId) => {
     const data = await getUserData(userGoogleId);
 
@@ -69,4 +90,4 @@ const userExists = async (authId) => {
     }
 };
 
-export { createUser, setUserDataAsState, userExists };
+export { createUser, setUserDataAsState, userExists, getUserIdByName };
