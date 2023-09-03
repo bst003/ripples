@@ -11,7 +11,7 @@ import UserContext from "./UserContext.jsx";
 import "./UserBadge.scss";
 
 const UserBadge = (props) => {
-    const { userGoogleId, isLink } = props;
+    const { userGoogleId, isLink, isSmall } = props;
 
     const userData = useContext(UserContext);
 
@@ -26,7 +26,7 @@ const UserBadge = (props) => {
 
     const renderBadgeContents = () => {
         const contents = (
-            <div className="user-badge">
+            <div className={"user-badge" + (isSmall ? " small" : "")}>
                 <img
                     src={user.userPic}
                     alt={user.userName + " profile pic"}
@@ -49,6 +49,7 @@ const UserBadge = (props) => {
 UserBadge.propTypes = {
     userGoogleId: PropTypes.string,
     isLink: PropTypes.bool,
+    isSmall: PropTypes.bool,
 };
 
 export default UserBadge;

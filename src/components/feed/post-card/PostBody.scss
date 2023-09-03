@@ -2,4 +2,13 @@
     padding: var(--pcPadding);
     border-bottom: 1px solid var(--siteBorderColor);
     white-space: pre-wrap;
+
+    >*:first-child{
+        margin-top: 0px;
+    }
+
+    >*:last-child{
+        margin-bottom: 0px;
+    }
+    
 }

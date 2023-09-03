@@ -34,6 +34,19 @@
     &-body{
         font-size: 14px;
         white-space: pre-wrap;
+
+        >*:first-child{
+            margin-top: 0px;
+        }
+
+        >*:last-child{
+            margin-bottom: 0px;
+        }
+
+        p{
+            margin: 10px 0px;
+        }
+
     }
 
 }

@@ -24,27 +24,6 @@ newComments state is updated aad the comment will disappear anyway?
 const PostComment = (props) => {
     const { id, content, userGoogleId, timestamp, passHandleDelete } = props;
 
-    console.log(content);
-
-    // const formatWhiteSpace = () => {
-    //     const contentArr = content.split("\n");
-    //     console.log(contentArr);
-    //     return contentArr;
-    // };
-
-    // console.log(formatWhiteSpace());
-
-    // const formattedContents = () => {
-    //     const test = formatWhiteSpace();
-    //     const newContent = test.map((para, index) => {
-    //         if (para !== "") {
-    //             return <p key={index}>{para}</p>;
-    //         }
-    //     });
-
-    //     return newContent;
-    // };
-
     const userData = useContext(UserContext);
 
     const [isDeleted, setIsDeleted] = useState(false);
@@ -65,7 +44,7 @@ const PostComment = (props) => {
             return (
                 <div className="pc__comment">
                     <div className="header">
-                        <UserBadge userGoogleId={userGoogleId} isLink={true} />
+                        <UserBadge userGoogleId={userGoogleId} isLink={true} isSmall={true} />
                         <TimeStamp timestamp={timestamp} />
                         {userData && userData.googleId === userGoogleId && (
                             <>

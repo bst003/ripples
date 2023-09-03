@@ -101,15 +101,6 @@ const PostCommentsFeed = (props) => {
             console.log("comment didn't filter, run in PostCard");
             passFilterNewCommentState(commentId);
         }
-
-        // const filteredComments = comments.filter((comment) => comment.id !== commentId);
-        // if (filteredComments.length !== comments.length) {
-        //     setComments(filteredComments);
-        // } else {
-        //     // ---------------------------------------------------
-        //     // pass commentId to PostCard and remove from newComments
-        //     // ---------------------------------------------------
-        // }
     };
 
     const appendNewComments = () => {

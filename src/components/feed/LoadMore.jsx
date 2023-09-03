@@ -1,11 +1,15 @@
 import PropTypes from "prop-types";
 
 const LoadMore = (props) => {
-    const { triggerLoadMore } = props;
+    const { triggerLoadMore, isSmall } = props;
 
     return (
         <div className="btns-contain center">
-            <button className="btn-el " type="button" onClick={triggerLoadMore}>
+            <button
+                className={"btn-el" + (isSmall ? " small" : "")}
+                type="button"
+                onClick={triggerLoadMore}
+            >
                 Load more
             </button>
         </div>
@@ -14,6 +18,7 @@ const LoadMore = (props) => {
 
 LoadMore.propTypes = {
     triggerLoadMore: PropTypes.func.isRequired,
+    isSmall: PropTypes.boolean,
 };
 
 export default LoadMore;
