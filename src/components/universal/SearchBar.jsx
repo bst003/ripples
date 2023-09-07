@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 import "./SearchBar.scss";
 
 const SearchBar = () => {
+    const navigateTo = useNavigate();
+
     const toggleSearchForm = (e) => {
         e.preventDefault();
         const toggle = e.currentTarget;
@@ -15,6 +19,14 @@ const SearchBar = () => {
         }
     };
 
+    const submitSearchForm = (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+
+        const searchVal = form.querySelector("#s").value;
+        navigateTo(`/search/?s=${searchVal}`);
+    };
+
     return (
         <div className="site-search-bar">
             <button className="site-search-bar__toggle" onClick={toggleSearchForm} type="button">
@@ -22,7 +34,7 @@ const SearchBar = () => {
                 <span className="screen-reader-text">Toggle Search</span>
             </button>
 
-            <form action="/search/" className="site-search-bar__form">
+            <form onSubmit={submitSearchForm} className="site-search-bar__form">
                 <label htmlFor="s">
                     <input
                         id="s"
