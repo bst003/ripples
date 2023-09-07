@@ -11,6 +11,7 @@ import Home from "./views/Home.jsx";
 import About from "./views/About.jsx";
 import SubRipple from "./views/SubRipple.jsx";
 import SinglePost from "./views/SinglePost.jsx";
+import Search from "./views/Search.jsx";
 import Profile from "./views/Profile.jsx";
 import NotFound from "./views/NotFound.jsx";
 
@@ -34,6 +35,7 @@ const RouteSwitch = () => {
                         <Route element={<NonFeedLayout />}>
                             <Route path="/profile/:username" element={<Profile />} />
                             <Route path="/post/:id" element={<SinglePost />} />
+                            <Route path="/search" element={<Search />} />
                             <Route path="/about" element={<About />} />
                             <Route path="*" element={<NotFound />} />
                         </Route>

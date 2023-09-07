@@ -46,7 +46,7 @@ const AccountNav = () => {
                     <nav className="account-nav__navigation">
                         <ul>
                             <li>
-                                <Link to="/profile">Profile</Link>
+                                <Link to={"/profile/" + user.userName}>Profile</Link>
                             </li>
                             <li>
                                 <button type="button" onClick={signOutUser}>

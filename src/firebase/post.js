@@ -65,6 +65,18 @@ const setPostsQuery = async (params, trueCount) => {
         );
     }
 
+    if (params.searchQuery) {
+        postsQuery = query(
+            collection(getFirestore(), "posts"),
+            orderBy("title"),
+            where("title", ">=", params.searchQuery),
+            where("title", "<=", params.searchQuery + "\uf8ff"),
+            // startAt(params.searchQuery),
+            // endAt(params.searchQuery + "\uf8ff"),
+            limit(trueCount)
+        );
+    }
+
     if (params.currentPosts.length > 0) {
         const startingPointDocRef = await getDoc(
             doc(getFirestore(), "posts", params.loadMoreStartPointID)
@@ -108,6 +120,8 @@ const getPosts = async (params) => {
     console.log(`count is ${trueCount}`);
     try {
         let postsQuery = await setPostsQuery(params, trueCount);
+
+        console.log(postsQuery);
 
         const postsQuerySnapshot = await getDocs(postsQuery);
 

@@ -22,7 +22,7 @@ REFACTOR getData methods to take OBJ as argument?
 */
 
 const Feed = (props) => {
-    const { subRippleId, userGoogleId } = props;
+    const { subRippleId, userGoogleId, searchQuery } = props;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -46,6 +46,10 @@ const Feed = (props) => {
 
         if (userGoogleId) {
             queryParams.userGoogleId = userGoogleId;
+        }
+
+        if (searchQuery) {
+            queryParams.searchQuery = searchQuery;
         }
 
         queryParams.currentPosts = [];
@@ -125,6 +129,7 @@ const Feed = (props) => {
 Feed.propTypes = {
     subRippleId: PropTypes.string,
     userGoogleId: PropTypes.string,
+    searchQuery: PropTypes.string,
 };
 
 export default Feed;

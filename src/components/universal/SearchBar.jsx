@@ -22,11 +22,11 @@ const SearchBar = () => {
                 <span className="screen-reader-text">Toggle Search</span>
             </button>
 
-            <form className="site-search-bar__form">
-                <label htmlFor="search">
+            <form action="/search/" className="site-search-bar__form">
+                <label htmlFor="s">
                     <input
-                        id="search"
-                        name="search"
+                        id="s"
+                        name="s"
                         className="search-input"
                         type="text"
                         placeholder="Search Posts"
