@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
+
+import { useParams } from "react-router-dom";
+
 import Feed from "../components/feed/Feed";
 
 const Search = () => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const searchQuery = urlParams.get("s");
+    const { searchParam } = useParams();
+
+    const [searchQuery, setSearchQuery] = useState("");
+
+    useEffect(() => {
+        setSearchQuery(searchParam);
+    }, [searchParam]);
 
     const mainContent = () => {
         if (!searchQuery) {

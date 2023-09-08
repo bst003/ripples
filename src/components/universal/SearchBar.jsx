@@ -24,7 +24,7 @@ const SearchBar = () => {
         const form = e.currentTarget;
 
         const searchVal = form.querySelector("#s").value;
-        navigateTo(`/search/?s=${searchVal}`);
+        navigateTo(`/search/${searchVal}`);
     };
 
     return (

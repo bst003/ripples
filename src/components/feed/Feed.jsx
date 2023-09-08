@@ -12,15 +12,6 @@ import LoadMore from "./LoadMore.jsx";
 
 import "./Feed.scss";
 
-/*
-
-How to offset posts?
-    https://firebase.google.com/docs/firestore/query-data/query-cursors
-
-REFACTOR getData methods to take OBJ as argument? 
-
-*/
-
 const Feed = (props) => {
     const { subRippleId, userGoogleId, searchQuery } = props;
 
@@ -31,7 +22,7 @@ const Feed = (props) => {
     // Stores the ID of the starting point of the next batch of loaded posts
     const [loadMoreStartPointID, setLoadMoreStartPointID] = useState(null);
 
-    const constructQueryParams = () => {
+    const constructQueryParams = (resetPosts = false) => {
         console.log("constructing params now");
         const queryParams = {
             setPostState: setPosts,
@@ -53,9 +44,12 @@ const Feed = (props) => {
         }
 
         queryParams.currentPosts = [];
-        if (posts) {
+        if (posts && !resetPosts) {
             queryParams.currentPosts = posts;
+            console.log("Are ther current posts");
         }
+
+        console.log(`search query is ${searchQuery}`);
 
         return queryParams;
     };
@@ -70,6 +64,19 @@ const Feed = (props) => {
 
     useEffect(() => {
         setIsLoading(true);
+        // setPosts([]);
+
+        const getPostsUpdateLoad = async () => {
+            await getPosts(constructQueryParams(true));
+            setIsLoading(false);
+        };
+
+        getPostsUpdateLoad();
+    }, [searchQuery]);
+
+    useEffect(() => {
+        setIsLoading(true);
+        // setPosts([]);
 
         const getPostsUpdateLoad = async () => {
             await getPosts(constructQueryParams());
