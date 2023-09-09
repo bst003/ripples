@@ -125,6 +125,19 @@ button{
     font-size: 15px;
 } 
 
+%iconButton{
+    height: 44px;
+    width: 44px;
+    background-color: var(--siteInputBg);
+    border: 1px solid var(--siteBorderColor);
+    border-radius: 100%;
+
+    &:hover,
+    &:focus-visible{
+        border-color: var(--brandDarkGray);
+    }
+}
+
 .btns-contain {
     margin: 32px 0px;
     display: flex;
@@ -150,6 +163,11 @@ button{
         @extend %smallButton;
     }
 }
+
+.btn-icon{
+    @extend %iconButton; 
+}
+
 
 // Base Nav
 ////////////////////////////////////////////////
@@ -256,6 +274,7 @@ input{
         position: absolute;
         top: 5px;
         right: 5px;
+        // @extend %iconButton;
     }
 
 }

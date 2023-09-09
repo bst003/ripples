@@ -16,19 +16,6 @@
             margin-left: auto;
         }
 
-        button{
-            height: 44px;
-            width: 44px;
-            background-color: var(--siteInputBg);
-            border: 1px solid var(--siteBorderColor);
-            border-radius: 100%;
-
-            &:hover,
-            &:focus-visible{
-                border-color: var(--brandDarkGray);
-            }
-        }
-
     }
 
     &-body{

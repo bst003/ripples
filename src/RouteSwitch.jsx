@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { initAuthListener } from "./firebase/authentication.js";
 
 import MainLayout from "./templates/MainLayout.jsx";
-import NonFeedLayout from "./templates/NonFeedLayout.jsx";
+import NonSubNavLayout from "./templates/NonSubNavLayout.jsx";
 import UserContext from "./components/universal/UserContext.jsx";
 
 import Home from "./views/Home.jsx";
@@ -32,7 +32,7 @@ const RouteSwitch = () => {
                             <Route path="/r/:slug" element={<SubRipple />} />
                         </Route>
 
-                        <Route element={<NonFeedLayout />}>
+                        <Route element={<NonSubNavLayout />}>
                             <Route path="/profile/:username" element={<Profile />} />
                             <Route path="/post/:id" element={<SinglePost />} />
                             <Route path="/search" element={<Search />} />

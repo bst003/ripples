@@ -48,7 +48,11 @@ const PostComment = (props) => {
                         <TimeStamp timestamp={timestamp} />
                         {userData && userData.googleId === userGoogleId && (
                             <>
-                                <button type="button" onClick={() => setModalIsOpen(true)}>
+                                <button
+                                    type="button"
+                                    className="btn-icon"
+                                    onClick={() => setModalIsOpen(true)}
+                                >
                                     <i className="fa-solid fa-trash"></i>
                                 </button>
                                 <DeleteModal

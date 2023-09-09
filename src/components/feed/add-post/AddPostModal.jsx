@@ -20,7 +20,7 @@ const AddPostModal = (props) => {
             onRequestClose={closeModal}
             contentLabel="Add Post Modal"
         >
-            <button className="ripples-modal__close" type="button" onClick={closeModal}>
+            <button className="ripples-modal__close btn-icon" type="button" onClick={closeModal}>
                 <span className="screen-reader-text">close</span>
                 <i className="fas fa-times"></i>
             </button>
