@@ -16,11 +16,6 @@ import { formatContentIntoPara } from "../../../util/formatting";
 
 import "./PostComment.scss";
 
-/*
-Should isDeleted be removed from PostComment since the comments and 
-newComments state is updated aad the comment will disappear anyway?
-*/
-
 const PostComment = (props) => {
     const { id, content, userGoogleId, timestamp, passHandleDelete } = props;
 

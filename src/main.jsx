@@ -11,12 +11,6 @@ import { getFirebaseConfig } from "./firebase/config.js";
 const firebaseAppConfig = getFirebaseConfig();
 initializeApp(firebaseAppConfig);
 
-/*
-
-Add check for if username is taken
-
-*/
-
 ReactDOM.createRoot(document.getElementById("root")).render(
     // <React.StrictMode>
     <RouteSwitch />

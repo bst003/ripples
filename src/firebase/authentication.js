@@ -10,14 +10,6 @@ import {
     signOut,
 } from "firebase/auth";
 
-/*
-
-How to organize authentication and user functions
-  - Only auth functions in this file and user fetching/organization functions in their own file?
-    - Should firebase querying be in a separate file from helper functions like the user organizaton files?
-
-*/
-
 const signInUser = async () => {
     // Sign in Firebase using popup auth and Google as the identity provider.
     var provider = new GoogleAuthProvider();
@@ -29,16 +21,6 @@ const signOutUser = () => {
     // Sign out of Firebase.
     signOut(getAuth());
 };
-
-// Returns the signed-in user's profile Pic URL.
-// function getProfilePicUrl() {
-//   return getAuth().currentUser.photoURL || "/images/profile_placeholder.png";
-// }
-
-// Returns the signed-in user's display name.
-// function getUserName() {
-//   return getAuth().currentUser.displayName;
-// }
 
 const initAuthListener = async (setUserState) => {
     onAuthStateChanged(getAuth(), async (authUser) => {

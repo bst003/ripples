@@ -7,14 +7,6 @@ import { submitComment } from "../../../firebase/comment";
 import UserContext from "../../universal/UserContext";
 
 import "./PostAddCommentForm.scss";
-/*
-
-Need to pass following properties 
-    - content
-    - postId (prop)
-    - userGoogleId (prop)
-
-*/
 
 const PostAddCommentForm = (props) => {
     const { id, toggleCommentForm, passHandleNewComment } = props;
