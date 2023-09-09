@@ -34,10 +34,6 @@ const initAuthListener = async (setUserState) => {
                 createUser(formattedUserData);
             }
 
-            // const userData = await getUserData(authUser.uid);
-
-            // setUserState(userData);
-
             setUserDataAsState(setUserState, authUser.uid);
         } else {
             setUserState(null);
