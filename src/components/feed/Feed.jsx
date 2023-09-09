@@ -23,7 +23,6 @@ const Feed = (props) => {
     const [loadMoreStartPointID, setLoadMoreStartPointID] = useState(null);
 
     const constructQueryParams = (resetPosts = false) => {
-        console.log("constructing params now");
         const queryParams = {
             setPostState: setPosts,
             setLoadMoreStartPointID: setLoadMoreStartPointID,
@@ -46,10 +45,7 @@ const Feed = (props) => {
         queryParams.currentPosts = [];
         if (posts && !resetPosts) {
             queryParams.currentPosts = posts;
-            console.log("Are ther current posts");
         }
-
-        console.log(`search query is ${searchQuery}`);
 
         return queryParams;
     };

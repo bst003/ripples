@@ -40,8 +40,6 @@ const PostCommentsFeed = (props) => {
             queryParams.currentComments = comments;
         }
 
-        console.log(queryParams);
-
         return queryParams;
     };
 
