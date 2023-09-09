@@ -22,8 +22,6 @@ const getPost = async (setPostState, postId = null) => {
 
         const postObj = {};
         postQuerySnapshot.forEach((doc) => {
-            console.log(doc.data());
-
             postObj.id = doc.id;
             postObj.title = doc.data().title;
             postObj.content = doc.data().content;
@@ -31,8 +29,6 @@ const getPost = async (setPostState, postId = null) => {
             postObj.forumId = doc.data().forumId;
             postObj.timestamp = doc.data().timestamp.toMillis();
         });
-
-        console.log(postObj);
 
         setPostState(postObj);
     } catch (error) {
@@ -66,27 +62,19 @@ const setPostsQuery = async (params, trueCount) => {
     }
 
     if (params.searchQuery) {
-        console.log(`Query is ${params.searchQuery}`);
         postsQuery = query(
             collection(getFirestore(), "posts"),
             orderBy("title"),
             where("title", ">=", params.searchQuery),
             where("title", "<=", params.searchQuery + "\uf8ff"),
-            // startAt(params.searchQuery),
-            // endAt(params.searchQuery + "\uf8ff"),
             limit(trueCount)
         );
     }
 
-    console.log("test");
-
     if (params.currentPosts.length > 0 && params.loadMoreStartPointID != null) {
-        console.log("are there posts now");
         const startingPointDocRef = await getDoc(
             doc(getFirestore(), "posts", params.loadMoreStartPointID)
         );
-
-        console.log("is there a starting point");
 
         postsQuery = query(
             collection(getFirestore(), "posts"),
@@ -116,18 +104,13 @@ const setPostsQuery = async (params, trueCount) => {
         }
     }
 
-    console.log("end of query");
-
     return postsQuery;
 };
 
 const getPosts = async (params) => {
     let trueCount = params.count + Number(1);
-    console.log(`count is ${trueCount}`);
     try {
         let postsQuery = await setPostsQuery(params, trueCount);
-
-        console.log(postsQuery);
 
         const postsQuerySnapshot = await getDocs(postsQuery);
 
@@ -142,14 +125,10 @@ const getPosts = async (params) => {
                 timestamp: doc.data().timestamp.toMillis(),
             };
 
-            console.log(postObj);
-
             postsArray.push(postObj);
         });
 
         if (postsArray.length === trueCount) {
-            console.log("overlow, show load more");
-            // params.setLoadMore(true);
             params.setLoadMoreStartPointID(postsArray[postsArray.length - 1].id);
             postsArray.pop();
         } else {
@@ -168,10 +147,8 @@ const getPosts = async (params) => {
 };
 
 const deletePost = async (postId) => {
-    console.log(postId);
     try {
-        const deletedDoc = await deleteDoc(doc(getFirestore(), "posts", postId));
-        console.log(deletedDoc);
+        await deleteDoc(doc(getFirestore(), "posts", postId));
         return true;
     } catch (error) {
         console.log("Error deleting post: " + error);
@@ -180,16 +157,12 @@ const deletePost = async (postId) => {
 };
 
 const submitPost = async (postObj) => {
-    console.log("test");
     try {
         const newPost = await addDoc(collection(getFirestore(), "posts"), {
             ...postObj,
             timestamp: serverTimestamp(),
         });
 
-        console.log(newPost.id);
-
-        // setSubmitted(true);
         return newPost.id;
     } catch (error) {
         console.error("Error saving post to Firebase Database", error);

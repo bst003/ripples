@@ -18,14 +18,10 @@ const getForum = async (setForumState, subRippleId = null, subRippleSlug = null)
             );
         }
 
-        // const forumQuery = query(collection(getFirestore(), "forums"), slugQuery, idQuery);
-
         const forumQuerySnapshot = await getDocs(forumQuery);
 
         const forumObj = {};
         forumQuerySnapshot.forEach((doc) => {
-            // console.log(doc.data());
-
             forumObj.id = doc.id;
             forumObj.label = doc.data().label;
             forumObj.slug = doc.data().slug;
