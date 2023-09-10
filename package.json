@@ -1,5 +1,6 @@
 {
   "name": "ripples",
+  "homepage": "http://bst003.github.io/ripples",
   "private": true,
   "version": "0.0.0",
   "type": "module",
