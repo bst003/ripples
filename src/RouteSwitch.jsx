@@ -25,7 +25,7 @@ const RouteSwitch = () => {
     return (
         <>
             <UserContext.Provider value={user}>
-                <BrowserRouter>
+                <BrowserRouter basename="/ripples">
                     <Routes>
                         <Route element={<MainLayout />}>
                             <Route path="/" element={<Home />} />
