@@ -31,7 +31,7 @@ const initAuthListener = async (setUserState) => {
             // If user does not exist in DB add one
             if (!user) {
                 const formattedUserData = formatUserData(authUser);
-                createUser(formattedUserData);
+                await createUser(formattedUserData);
             }
 
             setUserDataAsState(setUserState, authUser.uid);
